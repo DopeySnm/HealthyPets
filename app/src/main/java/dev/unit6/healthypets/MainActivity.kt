@@ -1,14 +1,14 @@
 package dev.unit6.healthypets
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import by.kirich1409.viewbindingdelegate.viewBinding
+import dev.unit6.healthypets.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+    private val binding: ActivityMainBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_HealthyPets)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 }

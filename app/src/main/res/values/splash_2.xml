@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <style name="Launcher" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="android:statusBarColor">@color/transparent</item>-->
+<!--        <item name="android:windowBackground">@drawable/launcher_screen</item>-->
+<!--    </style>-->
+
+<!--    <style name="Theme.HealthyPets.Launcher" parent="Theme.Material3.DayNight.NoActionBar">-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@drawable/launcher_screen</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowActionBar">false</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--    </style>-->
+
+    <style name="Base.Theme.HealthyPets" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="Theme.HealthyPets" parent="Base.Theme.HealthyPets">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="AppTheme.Launcher" parent="Base.Theme.HealthyPets">
+        <item name="android:windowBackground">@drawable/launcher_screen</item>
+    </style>
+</resources>
