@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Healthy Pets</string>
+    <string name="auth_help_come_up_code">Придумайте код\nдля входа вприложение</string>
+    <string name="auth_help_repeat_code">Повторите код</string>
+    <string name="auth_help_enter_сode">Введите код\nдля входа в приложение</string>
+
+    <string name="not_install_code">Не устанавливать код</string>
+
+    <string name="not_match_pin_code">Коды не совпадают</string>
+    <string name="wrong_pin_code">Неправильный код</string>
+
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AuthTextHint">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/bastille</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">SF Pro Display</item>
+    </style>
+
+    <style name="AuthButtonText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/burnt_orange</item>
+        <item name="fontFamily">SF Pro Display</item>
+    </style>
+
+    <style name="AuthWrongText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/free_speech_red</item>
+        <item name="fontFamily">SF Pro Display</item>
+    </style>
+</resources>
