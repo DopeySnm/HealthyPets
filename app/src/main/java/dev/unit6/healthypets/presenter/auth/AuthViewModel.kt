@@ -7,11 +7,14 @@ import androidx.lifecycle.ViewModel
 class AuthViewModel : ViewModel() {
 
     private val _pinCode = MutableLiveData<String>()
-    val pinCode : LiveData<String>
+    val pinCode: LiveData<String>
         get() = _pinCode
 
     fun setPinCode(pinCode: String) {
-        if (pinCode.length != 1) return
+        if (pinCode.length != 1) {
+            throw IllegalArgumentException("Method accepts a string with one PIN code character")
+        }
+
         _pinCode.value?.let {
             if (it.length < 4) {
                 val value = it + pinCode
