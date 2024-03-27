@@ -40,31 +40,31 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.pinCode.observe(viewLifecycleOwner){ pinCode ->
+        viewModel.pinCode.observe(viewLifecycleOwner) { pinCode ->
             setPinCodePoint(pinCode.length)
         }
         initializeKeyboard()
     }
 
-    private fun initializeKeyboard(){
+    private fun initializeKeyboard() {
         listKeyBoardButtons.forEach { btn ->
             btn.setOnClickListener { onDigitClick(btn.text.toString()) }
         }
-        binding.btnBackspace.setOnClickListener{ onBackspaceClick() }
+        binding.btnBackspace.setOnClickListener { onBackspaceClick() }
     }
 
-    private fun onDigitClick(digit : String){
+    private fun onDigitClick(digit: String) {
         viewModel.setPinCode(digit)
     }
 
-    private fun onBackspaceClick(){
+    private fun onBackspaceClick() {
         viewModel.backSpacePinCode()
     }
 
     private fun setPinCodePoint(pinCodeLength: Int) {
         emptyPinCodePoints()
         if (pinCodeLength <= 4) {
-            for(i in 0 until pinCodeLength) {
+            for (i in 0 until pinCodeLength) {
                 listPinCodePoint[i].setBackgroundResource(R.drawable.pincode_point_filled)
             }
         }
