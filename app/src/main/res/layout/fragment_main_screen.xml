@@ -49,9 +49,8 @@
                     android:textAppearance="@style/MainScreenDescriptionText"
                     android:textColor="@color/white"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/pickupfood_button"
-                    app:layout_constraintEnd_toStartOf="@+id/pickupfood_imageView"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pickupfood_name_textView" />
 

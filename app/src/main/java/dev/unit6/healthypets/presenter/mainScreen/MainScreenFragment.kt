@@ -13,7 +13,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private val binding: FragmentMainScreenBinding by viewBinding()
 
     private val adapter = FeedListAdapter(
-        ::onFeedBuyItemClick
+        ::onFeedBuyItemClick,
+        ::onFeedLikeItemClick
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,13 +23,16 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         adapter.submitList(
             listOf(
                 FeedUi(
-                    name = "Royal Canin Golden Retriever Adult, 3 кг"
+                    name = "Royal Canin Golden Retriever Adult, 3 кг",
+                    false
                 ),
                 FeedUi(
-                    name = "Hills Adult 1-6, 10 кг"
+                    name = "Hills Adult 1-6, 10 кг",
+                    true
                 ),
                 FeedUi(
-                    name = "Royal Canin Golden Retriever Adult, 3 кг"
+                    name = "Royal Canin Golden Retriever Adult, 3 кг",
+                    false
                 )
             )
         )
@@ -47,6 +51,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
 
     private fun onFeedBuyItemClick(entry: FeedUi) {
 
+    }
+
+    private fun onFeedLikeItemClick(entry: FeedUi) {
+        entry.like = entry.like.not()
     }
 
 }
