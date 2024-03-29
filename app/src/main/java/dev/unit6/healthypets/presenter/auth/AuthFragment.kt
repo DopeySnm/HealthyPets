@@ -1,20 +1,27 @@
 package dev.unit6.healthypets.presenter.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FragmentAuthBinding
-import java.util.Stack
+import dev.unit6.healthypets.di.appComponent
+import dev.unit6.healthypets.di.viewModel.ViewModelFactory
+import javax.inject.Inject
 
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     private val binding: FragmentAuthBinding by viewBinding()
 
-    private val viewModel: AuthViewModel = AuthViewModel()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel: AuthViewModel by viewModels { viewModelFactory }
 
     private val listKeyBoardButtons by lazy {
         listOf(
@@ -101,5 +108,10 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         for (point in listPinCodePoint) {
             point.setBackgroundResource(R.drawable.pincode_point_wrong)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
     }
 }
