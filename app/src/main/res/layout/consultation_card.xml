@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/default_card_background">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/consultation_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/consultation_name"
+        android:textAppearance="@style/MainScreenMainText"
+        android:textColor="@color/bastille"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/consultation_description_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/consultation_description"
+        android:textAppearance="@style/MainScreenDescriptionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consultation_name_textView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/consultation_status_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/status_online_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consultation_description_textView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/consultation_status_textView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/consultation_status_online"
+        android:textAppearance="@style/MainScreenDescriptionText"
+        android:textColor="@color/kelly_green"
+        app:layout_constraintBottom_toBottomOf="@+id/consultation_status_imageView"
+        app:layout_constraintStart_toEndOf="@+id/consultation_status_imageView"
+        app:layout_constraintTop_toTopOf="@+id/consultation_status_imageView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/consultation_button"
+        style="@style/MainScreenButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="16sp"
+        android:textAppearance="@style/MainScreenMainTextButton"
+        android:text="@string/consultation_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consultation_status_imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

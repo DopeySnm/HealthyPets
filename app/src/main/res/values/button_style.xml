@@ -13,7 +13,12 @@
 
     <style name="MainScreenButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">13sp</item>
         <item name="android:background">@drawable/main_screen_button_background_1</item>
     </style>
+
+    <style name="FeedButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/froly</item>
+        <item name="android:background">@drawable/feed_buy_button_background</item>
+    </style>
+
 </resources>
