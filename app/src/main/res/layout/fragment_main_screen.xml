@@ -22,383 +22,47 @@
             android:orientation="vertical"
             android:layout_margin="10dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/casablanca_card_background">
+                android:layout_margin="5dp"
+                android:id="@+id/pickupfood_container"
+                layout="@layout/pickupfood_card"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/pickupfood_name_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/choose_food_for_your_pet"
-                    android:textAppearance="@style/MainScreenMainText"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintEnd_toStartOf="@+id/pickupfood_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/pickupfood_description_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pickupfood_description"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="20dp"
-                    app:layout_constraintBottom_toTopOf="@+id/pickupfood_button"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pickupfood_name_textView" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/pickupfood_button"
-                    android:layout_width="102dp"
-                    android:layout_height="34dp"
-                    android:text="@string/pickupfood_button"
-                    style="@style/MainScreenButtonStyle"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/pickupfood_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/girl_with_dog_picture"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/default_card_background">
+                android:layout_margin="5dp"
+                android:id="@+id/consultation_container"
+                layout="@layout/consultation_card"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/consultation_name_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/consultation_name"
-                    android:textAppearance="@style/MainScreenMainText"
-                    android:textColor="@color/bastille"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/consultation_description_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/consultation_description"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/consultation_name_textView" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/consultation_status_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/status_online_picture"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/consultation_description_textView" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/consultation_status_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:text="@string/consultation_status_online"
-                    android:textColor="@color/kelly_green"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    app:layout_constraintBottom_toBottomOf="@+id/consultation_status_imageView"
-                    app:layout_constraintStart_toEndOf="@+id/consultation_status_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/consultation_status_imageView" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/consultation_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    style="@style/MainScreenButtonStyle"
-                    android:text="@string/consultation_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/consultation_status_imageView" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/default_card_background">
+                android:layout_margin="5dp"
+                android:id="@+id/fillpetprofile_container"
+                layout="@layout/fillpetprofile_card"/>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/fillpetprofile_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/paw_picture"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/fillpetprofile_name_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fillpetprofile_name"
-                    android:textAppearance="@style/MainScreenMainTextMiniCards"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fillpetprofile_imageView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/fillpetprofile_info_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/info_picture"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fillpetprofile_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fillpetprofile_name_textView" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/fillpetprofile_info_button_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fillpetprofile_info_button"
-                    android:textColor="@color/burnt_orange"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    android:layout_margin="5dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fillpetprofile_info_imageView"
-                    app:layout_constraintStart_toEndOf="@+id/fillpetprofile_info_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/fillpetprofile_info_imageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_margin="5dp"
+                android:id="@+id/map_and_telegram_container"
+                layout="@layout/map_and_telegram_card"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/veterianariansmap_constarintlayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/default_card_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/telegramchat_constarintlayout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/veterianariansmap_imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/geolocation_picture"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/veterianariansmap_name_textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="14dp"
-                        android:text="@string/veterianariansmap_name"
-                        android:textAppearance="@style/MainScreenMainTextMiniCards"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/veterianariansmap_imageView" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/veterianariansmap_description_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/veterianariansmap_description"
-                        android:textAppearance="@style/MainScreenDescriptionText"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/veterianariansmap_name_textView" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/telegramchat_constarintlayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/default_card_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/veterianariansmap_constarintlayout"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/telegramchat_imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/telegram_picture"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/telegramchat_name_textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="14dp"
-                        android:text="@string/telegramchat_name"
-                        android:textAppearance="@style/MainScreenMainTextMiniCards"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/telegramchat_imageView" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/telegramchat_description_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/telegramchat_description"
-                        android:textAppearance="@style/MainScreenDescriptionText"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/telegramchat_name_textView" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/froly_card_background">
+                android:layout_margin="5dp"
+                android:id="@+id/urgenthelp_container"
+                layout="@layout/urgenthelp_card"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/urgenthelp_name_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/urgenthelp_name"
-                    android:textAppearance="@style/MainScreenMainText"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintEnd_toStartOf="@+id/urgenthelp_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/urgenthelp_description_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/urgenthelp_description"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toTopOf="@+id/urgenthelp_button"
-                    app:layout_constraintEnd_toStartOf="@+id/urgenthelp_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/urgenthelp_name_textView" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/urgenthelp_button"
-                    android:layout_width="102dp"
-                    android:layout_height="34dp"
-                    style="@style/MainScreenButtonStyle"
-                    android:background="@drawable/main_screen_button_background_2"
-                    android:text="@string/urgenthelp_button"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/urgenthelp_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/girl_with_cat_picture"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/feed_name_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/feed_name"
-                    android:textAppearance="@style/MainScreenMainTextMiniCards"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/feed_get_all_button_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/MainScreenDescriptionText"
-                    android:text="@string/feed_get_all"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/feed_list_recyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="20dp"
-                    android:background="@drawable/default_card_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/feed_name_textView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_margin="5dp"
+                android:id="@+id/feed_list_container"
+                layout="@layout/feed_list_card" />
 
         </LinearLayout>
 

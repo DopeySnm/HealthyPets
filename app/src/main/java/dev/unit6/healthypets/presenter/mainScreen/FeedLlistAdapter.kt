@@ -2,42 +2,27 @@ package dev.unit6.healthypets.presenter.mainScreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FeedItemBinding
 
 class FeedListAdapter(
-    private val onBuyClick: (FeedUi) -> Unit,
-    private val onLikeClick: (FeedUi) -> Unit,
-) : RecyclerView.Adapter<FeedListAdapter.FeedListViewHolder>() {
-
-    private val list = mutableListOf<FeedUi>()
+    private val feedListener: FeedListener
+) : ListAdapter<FeedUi, FeedListAdapter.FeedListViewHolder>(FeedDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedListViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = FeedItemBinding.inflate(layoutInflater, parent, false)
-        return FeedListViewHolder(binding, onBuyClick, onLikeClick)
-    }
-
-    fun submitList(list: List<FeedUi>) = with(this.list) {
-        clear()
-        addAll(list)
-        notifyDataSetChanged()
-    }
-
-
-    override fun getItemCount(): Int {
-        return list.size
+        return FeedListViewHolder.create(parent, feedListener)
     }
 
     override fun onBindViewHolder(holder: FeedListViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(getItem(position))
     }
 
     class FeedListViewHolder(
         private val binding: FeedItemBinding,
-        private val onBuyClick: (FeedUi) -> Unit,
-        private val onLikeClick: (FeedUi) -> Unit,
+        private val feedListener: FeedListener,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(feed: FeedUi) {
             binding.nameFeedTextView.text = feed.name
@@ -45,11 +30,11 @@ class FeedListAdapter(
             setLikeBackground(feed.like)
 
             binding.buyButton.setOnClickListener {
-                onBuyClick(feed)
+                feedListener.onBuyClick(feed)
             }
 
             binding.likeImageView.setOnClickListener {
-                onLikeClick(feed)
+                feedListener.onLikeClick(feed)
                 setLikeBackground(feed.like)
             }
         }
@@ -62,6 +47,28 @@ class FeedListAdapter(
             }
         }
 
+        companion object {
+            fun create(
+                parent: ViewGroup,
+                feedListener: FeedListener,
+            ): FeedListViewHolder {
+                return FeedListViewHolder(
+                    FeedItemBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false),
+                    feedListener
+                )
+            }
+        }
     }
 
+    class FeedDiffUtil : DiffUtil.ItemCallback<FeedUi>() {
+        override fun areItemsTheSame(oldItem: FeedUi, newItem: FeedUi): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: FeedUi, newItem: FeedUi): Boolean {
+            return oldItem == newItem
+        }
+
+    }
 }
