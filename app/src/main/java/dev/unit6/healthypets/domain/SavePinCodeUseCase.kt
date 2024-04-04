@@ -1,6 +1,7 @@
 package dev.unit6.healthypets.domain
 
-import dev.unit6.healthypets.data.repository.PetsRepository
+import dev.unit6.healthypets.data.model.PinCode
+import dev.unit6.healthypets.data.repository.PinCodeRepository
 import javax.inject.Inject
 
 interface SavePinCodeHashUseCase {
@@ -8,7 +9,7 @@ interface SavePinCodeHashUseCase {
 }
 
 class SavePinCodeHashUseCaseImpl @Inject constructor(
-    private val repository: PetsRepository
+    private val repository: PinCodeRepository
 ) : SavePinCodeHashUseCase {
     override suspend fun invoke(pinCodeHash: ByteArray) {
         repository.savePinCodeHash(pinCodeHash)

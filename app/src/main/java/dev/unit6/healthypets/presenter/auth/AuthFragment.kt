@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
+import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentAuthBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
@@ -49,10 +50,29 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.pinCode.observe(viewLifecycleOwner) { pinCode ->
-            setPinCodePoint(pinCode.length)
+        viewModel.pinCodeLength.observe(viewLifecycleOwner) {
+            setPinCodePoint(it)
         }
+        viewModel.pinCodeState.observe(viewLifecycleOwner) {
+            when(it) {
+                is UiState.Success -> pinCodeViewState(it.value)
+                is UiState.Failure -> {}
+                is UiState.Loading -> {}
+            }
+        }
+        viewModel.checkPinCodeStatus()
         initializeKeyboard()
+    }
+
+    private fun pinCodeViewState(pinCodeState: PinCodeState) {
+        when(pinCodeState) {
+            PinCodeState.Enter -> enter()
+            PinCodeState.Repeat -> repeatPinCode()
+            PinCodeState.Register -> register()
+            PinCodeState.NotMatch -> notMatchPinCode()
+            PinCodeState.Wrong -> wrongPinCode()
+            PinCodeState.Access -> goMainScreen()
+        }
     }
 
     private fun initializeKeyboard() {
@@ -63,11 +83,11 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun onDigitClick(digit: String) {
-        viewModel.setPinCode(digit)
+        viewModel.trySetPinCode(digit)
     }
 
     private fun onBackspaceClick() {
-        viewModel.backSpacePinCode()
+        viewModel.tryBackSpacePinCode()
     }
 
     private fun setPinCodePoint(pinCodeLength: Int) {
@@ -81,14 +101,24 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         }
     }
 
+    private fun register() {
+        binding.wrongTextView.visibility = View.GONE
+        binding.buttonTextView.setText(R.string.not_install_code)
+        binding.helpTextView.setText(R.string.auth_help_come_up_code)
+    }
+
+    private fun enter() {
+        binding.wrongTextView.visibility = View.GONE
+        binding.buttonTextView.setText(R.string.can_not_enter)
+        binding.helpTextView.setText(R.string.auth_help_enter_сode)
+    }
+
     private fun notMatchPinCode() {
-        binding.wrongTextView.visibility = View.VISIBLE
         binding.wrongTextView.setText(R.string.not_match_pin_code)
         wrongPinCodePoints()
     }
 
     private fun wrongPinCode() {
-        binding.wrongTextView.visibility = View.VISIBLE
         binding.wrongTextView.setText(R.string.wrong_pin_code)
         wrongPinCodePoints()
     }
@@ -105,9 +135,14 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun wrongPinCodePoints() {
+        binding.wrongTextView.visibility = View.VISIBLE
         for (point in listPinCodePoint) {
             point.setBackgroundResource(R.drawable.pincode_point_wrong)
         }
+    }
+
+    private fun goMainScreen() {
+        TODO()
     }
 
     override fun onAttach(context: Context) {

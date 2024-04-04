@@ -2,9 +2,9 @@ package dev.unit6.healthypets
 
 import com.toxicbakery.bcrypt.Bcrypt
 
-object BCrypt {
+class PinCodeHelp {
     fun hashPinCode(pinCode: String): ByteArray {
-        return Bcrypt.hash(pinCode, 2)
+        return Bcrypt.hash(pinCode, 6)
     }
 
     fun verify(pinCode: String, expected: ByteArray): Boolean {

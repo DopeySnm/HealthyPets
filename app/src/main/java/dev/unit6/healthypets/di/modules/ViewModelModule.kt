@@ -18,6 +18,6 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
-    abstract fun bindConverterViewModel(viewModel: AuthViewModel): ViewModel
+    abstract fun bindAuthViewModel(viewModel: AuthViewModel): ViewModel
 
 }
