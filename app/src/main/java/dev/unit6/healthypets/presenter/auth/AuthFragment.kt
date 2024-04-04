@@ -3,6 +3,8 @@ package dev.unit6.healthypets.presenter.auth
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FragmentAuthBinding
@@ -63,10 +65,12 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     private fun setPinCodePoint(pinCodeLength: Int) {
         emptyPinCodePoints()
-        if (pinCodeLength <= 4) {
+        if (pinCodeLength < 4) {
             for (i in 0 until pinCodeLength) {
                 listPinCodePoint[i].setBackgroundResource(R.drawable.pincode_point_filled)
             }
+        } else {
+            Navigation.findNavController(requireView()).navigate(R.id.mainScreenFragment)
         }
     }
 
