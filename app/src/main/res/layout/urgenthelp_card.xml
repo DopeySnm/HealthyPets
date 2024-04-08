@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/froly_card_background">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/urgenthelp_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/urgenthelp_name"
+        android:textAppearance="@style/MainScreenMainText"
+        app:layout_constraintEnd_toStartOf="@+id/urgenthelp_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/urgenthelp_description_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="@string/urgenthelp_description"
+        android:textAppearance="@style/MainScreenDescriptionText"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/urgenthelp_button"
+        app:layout_constraintEnd_toStartOf="@+id/urgenthelp_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urgenthelp_name_textView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/urgenthelp_button"
+        android:layout_width="75dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/urgenthelp_button"
+        android:textSize="13sp"
+        android:textAppearance="@style/MainScreenMainTextButton"
+        style="@style/MainScreenButtonStyle"
+        android:background="@drawable/main_screen_button_background_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/urgenthelp_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/girl_with_cat_picture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,4 +20,31 @@
     <string name="_8">8</string>
     <string name="_9">9</string>
 
+
+    <string name="choose_food_for_your_pet">Подберите корм\nдля своего питомца</string>
+    <string name="pickupfood_description">Алгоритм подберет подходящие\nкорма с учетом всех\nособенностей питомца</string>
+    <string name="pickupfood_button">Подобрать</string>
+
+    <string name="consultation_name">Консультация специалиста</string>
+    <string name="consultation_description">Задайте дежурному ветеринару срочные вопросы\nили запишитесь на консультацию к диетологу</string>
+    <string name="consultation_status_online">Сейчас диетолог онлайн</string>
+    <string name="consultation_button">Пройти консультацию</string>
+    
+    <string name="fillpetprofile_name">Заполните подробно профиль\nпитомца</string>
+    <string name="fillpetprofile_info_button">Зачем это нужно?</string>
+
+    <string name="veterianariansmap_name">Ветеринары рядом</string>
+    <string name="veterianariansmap_description">Выбрать специалиста\nили клинику рядом</string>
+
+    <string name="telegramchat_name">Чат бот в telegram</string>
+    <string name="telegramchat_description">Подбрать специалиста\nи записаться на прием</string>
+
+    <string name="urgenthelp_name">Тревожный симптом</string>
+    <string name="urgenthelp_description">Когда необходимо срочно\nобратиться за помощью?</string>
+    <string name="urgenthelp_button">Узнать</string>
+
+    <string name="buy">Купить</string>
+
+    <string name="feed_name">Корма</string>
+    <string name="feed_get_all">Посмотреть все</string>
 </resources>

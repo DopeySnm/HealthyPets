@@ -18,4 +18,30 @@
         <item name="android:textColor">@color/free_speech_red</item>
         <item name="fontFamily">SF Pro Display</item>
     </style>
+
+    <style name="MainScreenText">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">SF Pro Display</item>
+    </style>
+
+    <style name="MainScreenMainText" parent="MainScreenText">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainScreenDescriptionText" parent="MainScreenText">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="MainScreenMainTextMiniCards" parent="MainScreenText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/bastille</item>
+    </style>
+
+    <style name="MainScreenMainTextButton" parent="MainScreenText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
