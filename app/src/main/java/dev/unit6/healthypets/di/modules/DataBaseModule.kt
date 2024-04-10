@@ -20,6 +20,6 @@ class DataBaseModule {
 
     @Provides
     fun provideCurrencyDao(db: PinCodeDatabase): PinCodeDao {
-        return db.currencyDao()
+        return db.pinCodeDao()
     }
 }

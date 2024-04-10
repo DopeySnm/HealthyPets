@@ -54,18 +54,18 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             setPinCodePoint(it)
         }
         viewModel.pinCodeState.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is UiState.Success -> pinCodeViewState(it.value)
                 is UiState.Failure -> {}
                 is UiState.Loading -> {}
             }
         }
-        viewModel.checkPinCodeStatus()
+        viewModel.checkPinCodeStatus(1)
         initializeKeyboard()
     }
 
     private fun pinCodeViewState(pinCodeState: PinCodeState) {
-        when(pinCodeState) {
+        when (pinCodeState) {
             PinCodeState.Enter -> enter()
             PinCodeState.Repeat -> repeatPinCode()
             PinCodeState.Register -> register()
@@ -80,10 +80,11 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             btn.setOnClickListener { onDigitClick(btn.text.toString()) }
         }
         binding.btnBackspace.setOnClickListener { onBackspaceClick() }
+        binding.buttonBackImageView.setOnClickListener { buttonBack() }
     }
 
     private fun onDigitClick(digit: String) {
-        viewModel.trySetPinCode(digit)
+        viewModel.trySetPinCode(1, digit)
     }
 
     private fun onBackspaceClick() {
@@ -101,14 +102,24 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         }
     }
 
+    private fun buttonBack() {
+        viewModel.resettingRegistration()
+    }
+
     private fun register() {
-        binding.wrongTextView.visibility = View.GONE
+        binding.buttonBackImageView.isEnabled = false
+        binding.buttonBackImageView.visibility = View.INVISIBLE
+
+        binding.wrongTextView.visibility = View.INVISIBLE
         binding.buttonTextView.setText(R.string.not_install_code)
         binding.helpTextView.setText(R.string.auth_help_come_up_code)
     }
 
     private fun enter() {
-        binding.wrongTextView.visibility = View.GONE
+        binding.buttonBackImageView.isEnabled = false
+        binding.buttonBackImageView.visibility = View.INVISIBLE
+
+        binding.wrongTextView.visibility = View.INVISIBLE
         binding.buttonTextView.setText(R.string.can_not_enter)
         binding.helpTextView.setText(R.string.auth_help_enter_сode)
     }
@@ -124,6 +135,9 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun repeatPinCode() {
+        binding.buttonBackImageView.isEnabled = true
+        binding.buttonBackImageView.visibility = View.VISIBLE
+
         binding.helpTextView.setText(R.string.auth_help_repeat_code)
         emptyPinCodePoints()
     }

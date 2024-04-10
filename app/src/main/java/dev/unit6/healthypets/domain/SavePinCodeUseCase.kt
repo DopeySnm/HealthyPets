@@ -1,7 +1,6 @@
 package dev.unit6.healthypets.domain
 
-import dev.unit6.healthypets.data.model.PinCode
-import dev.unit6.healthypets.data.repository.PinCodeRepository
+import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import javax.inject.Inject
 
 interface SavePinCodeHashUseCase {

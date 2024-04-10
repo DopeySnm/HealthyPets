@@ -32,19 +32,17 @@ class AuthViewModel
 
     private val pinCodeHelp = PinCodeHelp()
 
-    fun checkPinCodeStatus() {
+    fun checkPinCodeStatus(id: Int) {
         viewModelScope.launch {
-            val pinCodeHash = getPinCodeHashUseCase()
+            val pinCodeHash = getPinCodeHashUseCase(id)
             pinCodeHash.let {
                 when (it) {
                     is DataState.Success -> {
                         if (it.value.firstRun) {
                             _pinCodeState.postValue(UiState.Success(PinCodeState.Register))
-                        }
-//                        else if (it.value.firstRun && it.value.pinCodeHash == null) {
-//                            _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
-//                        }
-                        else {
+                        } else if (it.value.pinCodeHash == null) {
+                            _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+                        } else {
                             _pinCodeState.postValue(UiState.Success(PinCodeState.Enter))
                         }
                     }
@@ -76,7 +74,7 @@ class AuthViewModel
         return isFilled
     }
 
-    fun trySetPinCode(pinCode: String) {
+    fun trySetPinCode(id: Int, pinCode: String) {
         if (pinCode.length != 1) {
             throw IllegalArgumentException("Method accepts a string with one PIN code character")
         }
@@ -98,21 +96,23 @@ class AuthViewModel
 
                     PinCodeState.Enter -> {
                         if (setPinCode(pinCode, _pinCode)) {
-                            verify()
+                            verify(id)
                         }
                     }
 
                     PinCodeState.Wrong -> {
                         _pinCodeState.postValue(UiState.Success(PinCodeState.Enter))
-                        _pinCode.postValue("")
+                        _pinCode.value = ""
                         _pinCodeLength.postValue(0)
-
+                        setPinCode(pinCode, _pinCode)
                     }
 
                     PinCodeState.NotMatch -> {
-                        _pinCodeState.postValue(UiState.Success(PinCodeState.Repeat))
-                        _repeatPinCode.postValue("")
+                        _pinCodeState.postValue(UiState.Success(PinCodeState.Register))
+                        _repeatPinCode.value = ""
+                        _pinCode.value = ""
                         _pinCodeLength.postValue(0)
+                        setPinCode(pinCode, _pinCode)
                     }
 
                     else -> _pinCodeState.postValue(UiState.Failure(""))
@@ -137,24 +137,21 @@ class AuthViewModel
         }
     }
 
-    private fun verify() {
+    private fun verify(id: Int) {
         viewModelScope.launch {
             _pinCode.value?.let { pinCode ->
-                val pinCodeHash = getPinCodeHashUseCase()
-                pinCodeHash.let {
-                    when (it) {
-                        is DataState.Success -> {
-                            val verify = pinCodeHelp.verify(pinCode, it.value.pinCodeHash!!)
-                            if (verify) {
-                                _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
-                            } else {
-                                _pinCodeState.postValue(UiState.Success(PinCodeState.Wrong))
-                            }
+                when (val pinCodeHash = getPinCodeHashUseCase(id)) {
+                    is DataState.Success -> {
+                        val verify = pinCodeHelp.verify(pinCode, pinCodeHash.value.pinCodeHash!!)
+                        if (verify) {
+                            _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+                        } else {
+                            _pinCodeState.postValue(UiState.Success(PinCodeState.Wrong))
                         }
+                    }
 
-                        is DataState.Failure -> {
-                            _pinCodeState.postValue(UiState.Failure("Verify failure"))
-                        }
+                    is DataState.Failure -> {
+                        _pinCodeState.postValue(UiState.Failure("Verify failure"))
                     }
                 }
             }
@@ -169,19 +166,19 @@ class AuthViewModel
         }
     }
 
+    fun resettingRegistration() {
+        _pinCodeState.postValue(UiState.Success(PinCodeState.Register))
+        _pinCodeLength.postValue(0)
+        _pinCode.postValue("")
+        _repeatPinCode.postValue("")
+    }
+
     fun tryBackSpacePinCode() {
         _pinCodeState.value.let {
             if (it is UiState.Success) {
                 when (it.value) {
                     PinCodeState.Repeat -> {
                         backSpacePinCode(_repeatPinCode)
-                        _repeatPinCode.value?.let { repeatPinCode ->
-                            if (repeatPinCode.isEmpty()) {
-                                _pinCodeState.postValue(UiState.Success(PinCodeState.Register))
-                                _pinCode.postValue("")
-                            }
-                        }
-
                     }
 
                     else -> backSpacePinCode(_pinCode)

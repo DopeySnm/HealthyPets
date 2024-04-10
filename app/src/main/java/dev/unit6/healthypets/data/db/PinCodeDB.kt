@@ -11,5 +11,5 @@ import dev.unit6.healthypets.data.db.model.PinCodeEntity
     version = 1
 )
 abstract class PinCodeDatabase : RoomDatabase() {
-    abstract fun currencyDao(): PinCodeDao
+    abstract fun pinCodeDao(): PinCodeDao
 }

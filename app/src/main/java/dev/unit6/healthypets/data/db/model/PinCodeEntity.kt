@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
     tableName = "pinCode"
 )
 data class PinCodeEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val value: ByteArray
 )

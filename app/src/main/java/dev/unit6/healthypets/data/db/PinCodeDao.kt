@@ -10,6 +10,6 @@ interface PinCodeDao {
     @Upsert
     suspend fun saveHashPinCode(pinCode: PinCodeEntity)
 
-    @Query("SELECT * FROM pinCode")
-    suspend fun getHashPinCode(): ByteArray
+    @Query("SELECT * FROM pinCode WHERE id = :id")
+    suspend fun getHashPinCode(id: Int): ByteArray
 }
