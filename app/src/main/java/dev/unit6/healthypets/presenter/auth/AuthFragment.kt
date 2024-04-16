@@ -24,6 +24,8 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     private val viewModel: AuthViewModel by viewModels { viewModelFactory }
 
+    private val pinCodeNumber = 1
+
     private val listKeyBoardButtons by lazy {
         listOf(
             binding.btn0,
@@ -60,7 +62,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
                 is UiState.Loading -> {}
             }
         }
-        viewModel.checkPinCodeStatus(1)
+        viewModel.checkPinCodeStatus(pinCodeNumber)
         initializeKeyboard()
     }
 
@@ -84,7 +86,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun onDigitClick(digit: String) {
-        viewModel.trySetPinCode(1, digit)
+        viewModel.trySetPinCode(pinCodeNumber, digit)
     }
 
     private fun onBackspaceClick() {
@@ -97,8 +99,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             for (i in 0 until pinCodeLength) {
                 listPinCodePoint[i].setBackgroundResource(R.drawable.pincode_point_filled)
             }
-        } else {
-            Navigation.findNavController(requireView()).navigate(R.id.mainScreenFragment)
         }
     }
 
@@ -112,6 +112,9 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
         binding.wrongTextView.visibility = View.INVISIBLE
         binding.buttonTextView.setText(R.string.not_install_code)
+        binding.buttonTextView.setOnClickListener {
+            viewModel.emptyPinCode()
+        }
         binding.helpTextView.setText(R.string.auth_help_come_up_code)
     }
 
@@ -156,7 +159,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun goMainScreen() {
-        TODO()
+        Navigation.findNavController(requireView()).navigate(R.id.mainScreenFragment)
     }
 
     override fun onAttach(context: Context) {

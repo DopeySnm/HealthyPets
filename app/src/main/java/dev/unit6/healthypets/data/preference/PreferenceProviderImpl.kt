@@ -14,19 +14,19 @@ class PreferenceProviderImpl @Inject constructor(
         get() = appContext.getSharedPreferences(sharedPreferenceName, Context.MODE_PRIVATE)
 
 
-    override fun setFirstRun() {
+    override fun setIsProtected() {
         preference.edit().putBoolean(
-            KEY_FIRST_RUN,
-            false
+            IS_PROTECTED,
+            true
         ).commit() // apply() don't save, therefore use commit
     }
 
-    override fun getFirstRun(): Boolean {
-        return preference.getBoolean(KEY_FIRST_RUN, true)
+    override fun getIsProtected(): Boolean {
+        return preference.getBoolean(IS_PROTECTED, false)
     }
 
     companion object {
         const val sharedPreferenceName = "healthy_pets_pref"
-        const val KEY_FIRST_RUN = "first_run"
+        const val IS_PROTECTED = "is_protected"
     }
 }

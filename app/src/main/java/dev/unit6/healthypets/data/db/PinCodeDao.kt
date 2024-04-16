@@ -11,5 +11,5 @@ interface PinCodeDao {
     suspend fun saveHashPinCode(pinCode: PinCodeEntity)
 
     @Query("SELECT * FROM pinCode WHERE id = :id")
-    suspend fun getHashPinCode(id: Int): ByteArray
+    suspend fun getHashPinCode(id: Int): PinCodeEntity?
 }

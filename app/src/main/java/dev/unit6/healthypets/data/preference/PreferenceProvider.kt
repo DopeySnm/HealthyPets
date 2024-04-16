@@ -1,7 +1,7 @@
 package dev.unit6.healthypets.data.preference
 
 interface PreferenceProvider {
-    fun setFirstRun()
+    fun setIsProtected()
 
-    fun getFirstRun(): Boolean
+    fun getIsProtected(): Boolean
 }

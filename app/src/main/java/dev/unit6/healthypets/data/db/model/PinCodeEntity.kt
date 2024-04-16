@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 )
 data class PinCodeEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
     val value: ByteArray
 )

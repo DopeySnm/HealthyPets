@@ -12,19 +12,30 @@ class PinCodeRepositoryImpl @Inject constructor(
     private val preferenceProvider: PreferenceProvider
 ) : PinCodeRepository {
     override suspend fun savePinCodeHash(pinCodeHash: ByteArray) {
-        dao.saveHashPinCode(PinCodeEntity(value = pinCodeHash))
-        preferenceProvider.setFirstRun()
+        kotlin.runCatching {
+            dao.saveHashPinCode(PinCodeEntity(value = pinCodeHash))
+        }.fold(
+            onSuccess = {
+                preferenceProvider.setIsProtected()
+            },
+            onFailure = {
+                throw IllegalArgumentException("Can't save PIN code")
+            }
+        )
     }
 
     override suspend fun getPinCodeHash(id: Int): DataState<PinCode> {
-        kotlin.runCatching {
-            dao.getHashPinCode(id) to preferenceProvider.getFirstRun()
+        return kotlin.runCatching {
+            dao.getHashPinCode(id) to preferenceProvider.getIsProtected()
         }.fold(
-            onSuccess = {
-                return DataState.Success(PinCode(it.first, it.second))
+            onSuccess = { pair ->
+                pair.first?.let {
+                    DataState.Success(PinCode(it.value, pair.second))
+                }
+                DataState.Success(PinCode(null, pair.second))
             },
             onFailure = {
-                return DataState.Failure(it.message ?: "Unknown error")
+                DataState.Failure(it.message ?: "Unknown error")
             }
         )
     }
