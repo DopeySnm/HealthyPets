@@ -15,6 +15,7 @@ dagger = "2.47"
 retrofit = "2.9.0"
 okhttp3 = "4.11.0"
 room = "2.5.0"
+bcrypt = "+"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,8 @@ squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = 
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
 androidx-room-ktx =  { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
+bcrypt = { group = "com.ToxicBakery.library.bcrypt", name = "bcrypt", version.ref = "bcrypt"}
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
