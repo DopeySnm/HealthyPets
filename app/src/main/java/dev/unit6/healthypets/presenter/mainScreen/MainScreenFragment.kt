@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FragmentMainScreenBinding
+import dev.unit6.healthypets.presenter.auth.AuthFragment
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener {
     private val binding: FragmentMainScreenBinding by viewBinding()
@@ -48,4 +49,9 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
         feed.like = feed.like.not()
     }
 
+    companion object {
+        @JvmStatic
+        fun newInstance(): Fragment =
+            MainScreenFragment()
+    }
 }
