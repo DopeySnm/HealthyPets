@@ -71,4 +71,7 @@ dependencies {
     //Bcrypt MPP
     implementation(libs.bcrypt)
 
+    //Splash Api
+    implementation(libs.androidx.core.splashscreen)
+
 }
