@@ -12,5 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="navbar_height">80dp</item>
+        <item name="main_screen_padding">112dp</item>
     </style>
 </resources>

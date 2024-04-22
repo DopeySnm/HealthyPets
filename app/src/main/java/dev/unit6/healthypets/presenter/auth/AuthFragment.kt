@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
@@ -159,11 +158,16 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     }
 
     private fun goMainScreen() {
-        Navigation.findNavController(requireView()).navigate(R.id.mainScreenFragment)
+        Navigation.findNavController(requireView()).navigate(R.id.mainFragment)
     }
 
     override fun onAttach(context: Context) {
         context.appComponent.inject(this)
         super.onAttach(context)
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(): Fragment =
+            AuthFragment()
     }
 }
