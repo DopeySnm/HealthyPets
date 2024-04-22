@@ -40,4 +40,6 @@
     <string name="health">Здоровье</string>
     <string name="pets">Питомцы</string>
     <string name="profile">Профиль</string>
+    <string name="reset_help">Мы отправили письмо с ссылкой\nдля сброса кода на ваш e-mail </string>
+    <string name="test_emile">example@mail.ru</string>
 </resources>
