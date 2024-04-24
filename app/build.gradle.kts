@@ -74,4 +74,7 @@ dependencies {
     //Splash Api
     implementation(libs.androidx.core.splashscreen)
 
+    //Picasso
+    implementation(libs.picasso)
+
 }

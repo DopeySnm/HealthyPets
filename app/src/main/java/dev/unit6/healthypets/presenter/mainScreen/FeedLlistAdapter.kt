@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FeedItemBinding
 
@@ -27,8 +28,14 @@ class FeedListAdapter(
         fun bind(feed: FeedUi) {
             binding.nameFeedTextView.text = feed.name
 
-            setLikeBackground(feed.like)
+            if (feed.imageUrl != null) {
+                Picasso
+                    .get()
+                    .load(feed.imageUrl)
+                    .into(binding.feedImageView)
+            }
 
+            setLikeBackground(feed.like)
             binding.buyButton.setOnClickListener {
                 feedListener.onBuyClick(feed)
             }

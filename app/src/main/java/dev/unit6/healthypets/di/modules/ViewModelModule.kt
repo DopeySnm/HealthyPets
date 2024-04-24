@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.di.viewModel.ViewModelKey
 import dev.unit6.healthypets.presenter.auth.AuthViewModel
+import dev.unit6.healthypets.presenter.mainScreen.MainScreenViewModel
 
 @Module
 abstract class ViewModelModule {
@@ -19,5 +20,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     abstract fun bindAuthViewModel(viewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainScreenViewModel::class)
+    abstract fun bindMainScreenViewModel(viewModel: MainScreenViewModel): ViewModel
+
 
 }
