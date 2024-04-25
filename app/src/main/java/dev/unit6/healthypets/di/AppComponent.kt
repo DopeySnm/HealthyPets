@@ -10,6 +10,7 @@ import dev.unit6.healthypets.di.modules.NetworkModule
 import dev.unit6.healthypets.di.modules.ViewModelModule
 import dev.unit6.healthypets.presenter.auth.AuthFragment
 import dev.unit6.healthypets.presenter.mainScreen.MainScreenFragment
+import dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -23,8 +24,8 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(fragment: AuthFragment)
-
     fun inject(fragment: MainScreenFragment)
+    fun inject(fragment: FullListFeedsFragment)
 
     @Component.Builder
     interface Builder{

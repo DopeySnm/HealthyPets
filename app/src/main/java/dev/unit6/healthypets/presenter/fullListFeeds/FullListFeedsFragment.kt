@@ -1,22 +1,29 @@
-package dev.unit6.healthypets.presenter.mainScreen
+package dev.unit6.healthypets.presenter.fullListFeeds
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
-import dev.unit6.healthypets.data.state.UiState
-import dev.unit6.healthypets.databinding.FragmentMainScreenBinding
+import dev.unit6.healthypets.databinding.FragmentFullListFeedsBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
+import dev.unit6.healthypets.presenter.mainScreen.FeedListAdapter
+import dev.unit6.healthypets.presenter.mainScreen.FeedListener
+import dev.unit6.healthypets.presenter.mainScreen.FeedUi
+import dev.unit6.healthypets.presenter.mainScreen.MainScreenViewModel
 import javax.inject.Inject
 
-class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener {
-    private val binding: FragmentMainScreenBinding by viewBinding()
+class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedListener {
+
+    private val binding: FragmentFullListFeedsBinding by viewBinding()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -29,11 +36,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.feedList.observe(viewLifecycleOwner) {
-            when(it){
-                is UiState.Success -> adapter.submitList(it.value)
-                is UiState.Failure -> adapter.submitList(listOf())
-                is UiState.Loading -> adapter.submitList(listOf())
-            }
+            adapter.submitList(it)
         }
 
         viewModel.loadFeedList()
@@ -43,24 +46,24 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
     private fun initializeUI() {
         initializeRecycler()
-        initializeButtonAllFeeds()
+        initializeButtonBack()
     }
 
-    private fun initializeButtonAllFeeds() {
-        binding.feedListContainer.feedGetAllButtonTextView.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.fullListFeedsFragment)
+    private fun initializeButtonBack() {
+        binding.buttonBackImageView.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
         }
     }
 
-    private fun initializeRecycler() = with(binding.feedListContainer.feedListRecyclerView) {
-        layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
+    private fun initializeRecycler() = with(binding.feedsListRecyclerView) {
+        layoutManager = GridLayoutManager(
+            context,
+            2
         )
-        addItemDecoration(HorizontalSpaceItemDecoration(20))
-        adapter = this@MainScreenFragment.adapter
+        addItemDecoration(GridSpacingItemDecoration(2, 100, false))
+        adapter = this@FullListFeedsFragment.adapter
     }
+
 
     override fun onBuyClick(feed: FeedUi) {
         TODO("Not yet implemented")
@@ -78,6 +81,6 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
     companion object {
         @JvmStatic
         fun newInstance(): Fragment =
-            MainScreenFragment()
+            FullListFeedsFragment()
     }
 }

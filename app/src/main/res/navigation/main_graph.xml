@@ -5,26 +5,43 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/authFragment">
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="dev.unit6.healthypets.presenter.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-    </fragment>
-    <fragment
         android:id="@+id/authFragment"
         android:name="dev.unit6.healthypets.presenter.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" >
         <action
-            android:id="@+id/action_authFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-        <action
             android:id="@+id/action_authFragment_to_PINCodeResetFragment"
             app:destination="@id/PINCodeResetFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullListFeedsFragment"
+        android:name="dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment"
+        android:label="fragment_full_list_feeds"
+        tools:layout="@layout/fragment_full_list_feeds" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="dev.unit6.healthypets.presenter.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_mainScreenFragment2"
+            app:destination="@id/mainScreenFragment2" />
     </fragment>
     <fragment
         android:id="@+id/PINCodeResetFragment"
         android:name="dev.unit6.healthypets.presenter.auth.PINCodeResetFragment"
-        android:label="fragment_p_i_n_code_reset"
+        android:label="fragment_pin_code_reset"
         tools:layout="@layout/fragment_pin_code_reset" />
+    <fragment
+        android:id="@+id/mainScreenFragment2"
+        android:name="dev.unit6.healthypets.presenter.mainScreen.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreenFragment2_to_fullListFeedsFragment"
+            app:destination="@id/fullListFeedsFragment" />
+    </fragment>
 </navigation>
