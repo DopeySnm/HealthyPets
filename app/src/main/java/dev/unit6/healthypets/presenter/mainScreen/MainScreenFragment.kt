@@ -30,7 +30,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
         viewModel.feedList.observe(viewLifecycleOwner) {
             when(it){
-                is UiState.Success -> adapter.submitList(it.value)
+                is UiState.Success -> {
+                    val result = it.value.map { food ->
+                            food.toFeedUI()
+                        }
+                    adapter.submitList(result)
+                }
                 is UiState.Failure -> adapter.submitList(listOf())
                 is UiState.Loading -> adapter.submitList(listOf())
             }
@@ -68,6 +73,25 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
     override fun onLikeClick(feed: FeedUi) {
         feed.like = feed.like.not()
+    }
+
+    override fun onClickFeed(feed: FeedUi) {
+        viewModel.feedList.observe(viewLifecycleOwner) {
+            when(it){
+                is UiState.Success -> {
+                    Navigation.findNavController(requireView()).navigate(R.id.PINCodeResetFragment)
+                    val result = it.value.find { food ->
+                        food.id == feed.id
+                    }
+                }
+                is UiState.Failure -> {
+                    adapter.submitList(listOf())
+                }
+                is UiState.Loading -> {
+                    adapter.submitList(listOf())
+                }
+            }
+        }
     }
 
     override fun onAttach(context: Context) {

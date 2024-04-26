@@ -6,4 +6,6 @@ interface FeedListener {
 
     fun onLikeClick(feed: FeedUi)
 
+    fun onClickFeed(feed: FeedUi)
+
 }

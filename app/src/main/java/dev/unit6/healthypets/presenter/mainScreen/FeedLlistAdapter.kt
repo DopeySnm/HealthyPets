@@ -46,6 +46,10 @@ class FeedListAdapter(
                 feedListener.onBuyClick(feed)
             }
 
+            binding.root.setOnClickListener {
+                feedListener.onBuyClick(feed)
+            }
+
             binding.likeImageView.setOnClickListener {
                 feedListener.onLikeClick(feed)
                 setLikeBackground(feed.like)

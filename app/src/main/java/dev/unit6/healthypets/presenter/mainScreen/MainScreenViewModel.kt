@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
@@ -14,9 +15,9 @@ class MainScreenViewModel @Inject constructor(
     private val getAllFoods: GetAllFoodsUseCase
 ) : ViewModel() {
 
-    private val _feedList = MutableLiveData<UiState<List<FeedUi>>>(UiState.Loading)
+    private val _feedList = MutableLiveData<UiState<List<Food>>>(UiState.Loading)
 
-    val feedList: LiveData<UiState<List<FeedUi>>>
+    val feedList: LiveData<UiState<List<Food>>>
         get() = _feedList
 
 
@@ -24,17 +25,7 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             val foods = getAllFoods()
             foods.let {
-                when(it) {
-                    is DataState.Success -> {
-                        val result = it.value.map { food ->
-                            food.toFeedUI()
-                        }
-                        _feedList.postValue(UiState.Success(result.subList(0, 10)))
-                    }
-                    is DataState.Failure -> {
-                        _feedList.postValue(UiState.Failure(it.message))
-                    }
-                }
+                _feedList.postValue(UiState.fromDataState(it))
             }
         }
     }

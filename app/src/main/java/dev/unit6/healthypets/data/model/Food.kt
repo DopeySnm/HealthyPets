@@ -21,6 +21,7 @@ data class Food(
 ) {
     fun toFeedUI(): FeedUi {
         return FeedUi(
+            this.id,
             this.name,
             this.urlImage,
             false
