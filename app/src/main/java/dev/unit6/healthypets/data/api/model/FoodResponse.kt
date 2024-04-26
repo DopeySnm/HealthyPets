@@ -1,6 +1,6 @@
 package dev.unit6.healthypets.data.api.model
 
-import dev.unit6.healthypets.R
+
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.model.PetAge
 import dev.unit6.healthypets.data.model.PetSize
@@ -47,40 +47,32 @@ data class FoodResponse(
     val vetDiet: Boolean
 ) {
     fun foodResponseToFood(urlImage: String?): Food {
-        val nutrients = "${R.string.dry} ${this.dryProtein}%, " +
-                "${R.string.fats} ${this.dryFat}%, " +
-                "${R.string.minerals} ${this.dryCarbon}%, " +
-                "${R.string.dietaryFiber} ${this.dryCellulose}%."
-
         val typeProtein = this.proteins.joinToString(", ") { it.name } + "."
+
         val ageRange = this.growthPhases.map {
             PetAge.transform(it)
         }
+
         val weightRange = this.petSizes.map {
             PetSize.transform(it)
         }
 
-        val type = if (this.dry) R.string.dry.toString() else R.string.empty_value.toString()
-
         val specialNeeds = this.specialDiets.joinToString(", ") { it.name } + "."
-
-        val composition = this.ingredientsDescription ?: R.string.empty_value.toString()
-
-        val minerals = this.extraSubstances ?: R.string.empty_value.toString()
-
-        val countryName = this.countryName ?: R.string.empty_value.toString()
 
         return Food(
             id = this.id,
             name = this.name,
-            type = type,
-            nutrients = nutrients,
+            dry = this.dry,
+            dryProtein = this.dryProtein,
+            dryFat = this.dryFat,
+            dryCarbon = this.dryCarbon,
+            dryCellulose = this.dryCellulose,
             typeProtein = typeProtein,
             ageRange = ageRange,
             weightRange = weightRange,
-            countryName = countryName,
-            composition = composition,
-            minerals = minerals,
+            countryName = this.countryName,
+            composition = this.ingredientsDescription,
+            minerals = this.extraSubstances,
             specialNeeds = specialNeeds,
             urlImage = urlImage
         )
