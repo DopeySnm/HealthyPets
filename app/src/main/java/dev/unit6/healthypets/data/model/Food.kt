@@ -1,5 +1,7 @@
 package dev.unit6.healthypets.data.model
 
+import dev.unit6.healthypets.presenter.mainScreen.FeedUi
+
 data class Food(
     val id: Int,
     val name: String,
@@ -16,4 +18,12 @@ data class Food(
     val dryCarbon: Double,
     val dryCellulose: Double,
     val countryName: String?
-)
+) {
+    fun toFeedUI(): FeedUi {
+        return FeedUi(
+            this.name,
+            this.urlImage,
+            false
+        )
+    }
+}

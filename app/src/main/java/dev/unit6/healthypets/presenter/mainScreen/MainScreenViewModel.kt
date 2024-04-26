@@ -27,7 +27,7 @@ class MainScreenViewModel @Inject constructor(
                 when(it) {
                     is DataState.Success -> {
                         val result = it.value.map { food ->
-                            FeedUi(food.name, food.urlImage, false)
+                            food.toFeedUI()
                         }
                         _feedList.postValue(UiState.Success(result.subList(0, 10)))
                     }

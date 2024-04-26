@@ -46,7 +46,7 @@ data class FoodResponse(
     val specialDiets: List<SpecialDietResponse>,
     val vetDiet: Boolean
 ) {
-    fun foodResponseToFood(urlImage: String?): Food {
+    fun toFood(urlImage: String?): Food {
         val typeProtein = this.proteins.joinToString(", ") { it.name } + "."
 
         val ageRange = this.growthPhases.map {
@@ -77,52 +77,52 @@ data class FoodResponse(
             urlImage = urlImage
         )
     }
+
+    data class BrandGroupResponse(
+        val brandKey: String,
+        val id: Int,
+        val key: String,
+        val name: String
+    )
+
+    data class BrandResponse(
+        val groups: List<BrandGroupResponse>,
+        val id: Int,
+        val key: String,
+        val name: String
+    )
+
+    data class CarbohydrateResponse(
+        val id: Int,
+        val key: String,
+        val name: String,
+        val type: String
+    )
+
+    data class DiseaseResponse(
+        val id: Int,
+        val key: String,
+        val name: String
+    )
+
+    data class PetBreedResponse(
+        val id: Int,
+        val key: String,
+        val name: String,
+        val petSize: String,
+        val petType: String
+    )
+
+    data class ProteinResponse(
+        val id: Int,
+        val key: String,
+        val name: String,
+        val type: String
+    )
+
+    data class SpecialDietResponse(
+        val id: Int,
+        val key: String,
+        val name: String
+    )
 }
-
-data class BrandGroupResponse(
-    val brandKey: String,
-    val id: Int,
-    val key: String,
-    val name: String
-)
-
-data class BrandResponse(
-    val groups: List<BrandGroupResponse>,
-    val id: Int,
-    val key: String,
-    val name: String
-)
-
-data class CarbohydrateResponse(
-    val id: Int,
-    val key: String,
-    val name: String,
-    val type: String
-)
-
-data class DiseaseResponse(
-    val id: Int,
-    val key: String,
-    val name: String
-)
-
-data class PetBreedResponse(
-    val id: Int,
-    val key: String,
-    val name: String,
-    val petSize: String,
-    val petType: String
-)
-
-data class ProteinResponse(
-    val id: Int,
-    val key: String,
-    val name: String,
-    val type: String
-)
-
-data class SpecialDietResponse(
-    val id: Int,
-    val key: String,
-    val name: String
-)

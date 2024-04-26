@@ -25,7 +25,7 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                                     null
                                 }
                             }
-                            food.foodResponseToFood(imageUrl)
+                            food.toFood(imageUrl)
                         }
                         DataState.Success(result)
                     } ?: DataState.Failure("Empty response")
