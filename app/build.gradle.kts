@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.googleKsp)
-    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -56,7 +55,7 @@ dependencies {
 
     // dagger2 DI
     implementation(libs.google.dagger)
-    kapt(libs.google.dagger.compiler)
+    ksp(libs.google.dagger.compiler)
 
     // retrofit networking
     implementation(libs.squareup.retrofit2)
