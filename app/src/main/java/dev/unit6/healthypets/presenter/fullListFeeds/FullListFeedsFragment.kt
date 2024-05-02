@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
+import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentFullListFeedsBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
@@ -36,7 +37,12 @@ class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedL
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.feedList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            when(it) {
+                is UiState.Success -> adapter.submitList(it.value)
+                is UiState.Failure -> adapter.submitList(listOf())
+                is UiState.Loading -> adapter.submitList(listOf())
+            }
+
         }
 
         viewModel.loadFeedList()
