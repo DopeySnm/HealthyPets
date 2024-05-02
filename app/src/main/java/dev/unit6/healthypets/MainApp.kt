@@ -14,7 +14,4 @@ class MainApp : Application() {
             .application(this)
             .build()
     }
-    companion object {
-        const val HEALTH_PETS_API_URL = "https://test.healthypets.dev.unit6.ru/"
-    }
 }
