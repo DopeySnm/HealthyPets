@@ -9,4 +9,6 @@ interface HealthyPetsRepository {
     suspend fun getImage(name: String): DataState<String>
 
     suspend fun getFoodById(id: Int): DataState<Food>
+
+    suspend fun saveFavoriteFood(idFood: Int)
 }

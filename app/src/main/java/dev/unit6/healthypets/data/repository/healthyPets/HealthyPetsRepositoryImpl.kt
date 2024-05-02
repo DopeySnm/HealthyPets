@@ -3,13 +3,14 @@ package dev.unit6.healthypets.data.repository.healthyPets
 import dev.unit6.healthypets.data.api.HealthyPetsService
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import dev.unit6.healthypets.data.db.FoodDao
+import dev.unit6.healthypets.data.db.model.FavoriteFoodEntity
 
 
 class HealthyPetsRepositoryImpl @Inject constructor(
-    private val service: HealthyPetsService
+    private val service: HealthyPetsService,
+    private val dao: FoodDao
 ): HealthyPetsRepository {
 
     override suspend fun getAllFoods(): DataState<List<Food>> {
@@ -76,5 +77,8 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                 return DataState.Failure(it.message ?: "Unknown error")
             }
         )
+
+    override suspend fun saveFavoriteFood(idFood: Int) {
+        dao.saveFavoriteFood(idFood)
     }
 }

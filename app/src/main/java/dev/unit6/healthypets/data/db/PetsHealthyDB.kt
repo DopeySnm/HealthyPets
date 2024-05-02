@@ -10,6 +10,8 @@ import dev.unit6.healthypets.data.db.model.PinCodeEntity
     ],
     version = 1
 )
-abstract class PinCodeDatabase : RoomDatabase() {
+abstract class PetsHealthyDatabase : RoomDatabase() {
     abstract fun pinCodeDao(): PinCodeDao
+
+    abstract fun foodDao(): FoodDao
 }

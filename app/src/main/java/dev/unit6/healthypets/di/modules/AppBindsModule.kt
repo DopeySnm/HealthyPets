@@ -14,6 +14,8 @@ import dev.unit6.healthypets.domain.GetFeedByIdUseCase
 import dev.unit6.healthypets.domain.GetFeedByIdUseCaseImpl
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCaseImpl
+import dev.unit6.healthypets.domain.SaveFavoriteFoodUseCase
+import dev.unit6.healthypets.domain.SaveFavoriteFoodUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCaseImpl
 import javax.inject.Singleton
@@ -43,6 +45,12 @@ interface AppBindsModule {
     fun bindGetFeedByIdUseCase(
         useCase: GetFeedByIdUseCaseImpl
     ): GetFeedByIdUseCase
+    
+    @Binds
+    @Singleton
+    fun bindSaveFavoriteFoodUseCase(
+        useCase: SaveFavoriteFoodUseCaseImpl
+    ): SaveFavoriteFoodUseCase
 
     @Binds
     @Singleton
