@@ -60,7 +60,7 @@ class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedL
             context,
             2
         )
-        addItemDecoration(GridSpacingItemDecoration(2, 100, false))
+        addItemDecoration(GridSpacingItemDecoration(2, 60, false))
         adapter = this@FullListFeedsFragment.adapter
     }
 
