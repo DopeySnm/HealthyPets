@@ -1,18 +1,28 @@
 package dev.unit6.healthypets.presenter.mainScreen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
+import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentMainScreenBinding
+import dev.unit6.healthypets.di.appComponent
+import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.presenter.auth.AuthFragment
+import dev.unit6.healthypets.presenter.auth.AuthViewModel
+import javax.inject.Inject
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener {
     private val binding: FragmentMainScreenBinding by viewBinding()
 
-    private val viewModel: MainScreenViewModel = MainScreenViewModel()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel: MainScreenViewModel by viewModels { viewModelFactory }
 
     private val adapter = FeedListAdapter(this)
 
@@ -20,7 +30,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.feedList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            when(it){
+                is UiState.Success -> adapter.submitList(it.value)
+                is UiState.Failure -> adapter.submitList(listOf())
+                is UiState.Loading -> adapter.submitList(listOf())
+            }
         }
 
         viewModel.loadFeedList()
@@ -47,6 +61,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
     override fun onLikeClick(feed: FeedUi) {
         feed.like = feed.like.not()
+    }
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
     }
 
     companion object {

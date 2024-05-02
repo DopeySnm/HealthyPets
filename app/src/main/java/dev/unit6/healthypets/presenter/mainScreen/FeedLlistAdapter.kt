@@ -2,9 +2,11 @@ package dev.unit6.healthypets.presenter.mainScreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FeedItemBinding
 
@@ -27,8 +29,19 @@ class FeedListAdapter(
         fun bind(feed: FeedUi) {
             binding.nameFeedTextView.text = feed.name
 
-            setLikeBackground(feed.like)
+            if (feed.imageUrl != null) {
+                Picasso
+                    .get()
+                    .load(feed.imageUrl)
+                    .placeholder(R.drawable.ic_pet_food)
+                    .into(binding.feedImageView)
+            } else {
+                val drawablePlaceholder =
+                    AppCompatResources.getDrawable(binding.root.context, R.drawable.ic_pet_food)
+                binding.feedImageView.setImageDrawable(drawablePlaceholder)
+            }
 
+            setLikeBackground(feed.like)
             binding.buyButton.setOnClickListener {
                 feedListener.onBuyClick(feed)
             }
