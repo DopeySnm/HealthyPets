@@ -17,31 +17,38 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fullListFeedsFragment"
-        android:name="dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment"
-        android:label="fragment_full_list_feeds"
-        tools:layout="@layout/fragment_full_list_feeds" />
+        android:id="@+id/PINCodeResetFragment"
+        android:name="dev.unit6.healthypets.presenter.auth.PINCodeResetFragment"
+        android:label="fragment_pin_code_reset"
+        tools:layout="@layout/fragment_pin_code_reset" />
     <fragment
         android:id="@+id/mainFragment"
         android:name="dev.unit6.healthypets.presenter.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_mainScreenFragment2"
-            app:destination="@id/mainScreenFragment2" />
+            android:id="@+id/action_mainFragment_to_fullListFeedsFragment"
+            app:destination="@id/fullListFeedsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_feedInfoFragment"
+            app:destination="@id/feedInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/PINCodeResetFragment"
-        android:name="dev.unit6.healthypets.presenter.auth.PINCodeResetFragment"
-        android:label="fragment_pin_code_reset"
-        tools:layout="@layout/fragment_pin_code_reset" />
-    <fragment
-        android:id="@+id/mainScreenFragment2"
-        android:name="dev.unit6.healthypets.presenter.mainScreen.MainScreenFragment"
-        android:label="fragment_main_screen"
-        tools:layout="@layout/fragment_main_screen" >
+        android:id="@+id/fullListFeedsFragment"
+        android:name="dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment"
+        android:label="fragment_full_list_feeds"
+        tools:layout="@layout/fragment_full_list_feeds" >
         <action
-            android:id="@+id/action_mainScreenFragment2_to_fullListFeedsFragment"
-            app:destination="@id/fullListFeedsFragment" />
+            android:id="@+id/action_fullListFeedsFragment_to_feedInfoFragment"
+            app:destination="@id/feedInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedInfoFragment"
+        android:name="dev.unit6.healthypets.presenter.feedInfo.FeedInfoFragment"
+        android:label="fragment_feed_info"
+        tools:layout="@layout/fragment_feed_info" >
+        <argument
+            android:name="feedId"
+            app:argType="integer" />
     </fragment>
 </navigation>

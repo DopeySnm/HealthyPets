@@ -15,4 +15,9 @@ interface HealthyPetsService {
     suspend fun getImage(
         @Path("name") name: String
     ): Response<ResponseBody>
+
+    @GET("v1/food/{id}")
+    suspend fun getFoodById(
+        @Path("id") id: Int
+    ): Response<FoodResponse>
 }

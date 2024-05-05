@@ -51,4 +51,28 @@ class HealthyPetsRepositoryImpl @Inject constructor(
             }
         )
     }
+
+    override suspend fun getFoodById(id: Int): DataState<Food> {
+        kotlin.runCatching {
+            service.getFoodById(id)
+        }.fold(
+            onSuccess = { response ->
+                return if (response.isSuccessful) {
+                    response.body()?.let { food ->
+                        val imageUrl = getImage(food.image).let {
+                            if (it is DataState.Success) {
+                                it.value
+                            } else {
+                                null
+                            }
+                        }
+                        DataState.Success(food.toFood(imageUrl))
+                    } ?: DataState.Failure("Empty response")
+                } else DataState.Failure("Unable to get image")
+            },
+            onFailure = {
+                return DataState.Failure(it.message ?: "Unknown error")
+            }
+        )
+    }
 }

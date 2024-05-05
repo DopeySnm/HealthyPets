@@ -61,4 +61,12 @@
     <string name="fats">Жиры</string>
     <string name="minerals">Минеральные вещества</string>
     <string name="dietaryFiber">Клетчатка пищевая</string>
+    <string name="type">Тип</string>
+    <string name="compound">Состав</string>
+    <string name="age_range">Возрастной диапазон</string>
+    <string name="weight_range">Весовой диапазон</string>
+    <string name="type_protein">Вид протеина</string>
+    <string name="special_needs">Особые потребности</string>
+    <string name="nutrients">Питательные вещества</string>
+    <string name="manufacturer_country">Страна производитель</string>
 </resources>

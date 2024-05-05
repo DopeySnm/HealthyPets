@@ -1,9 +1,8 @@
 package dev.unit6.healthypets.data.model
 
-import androidx.annotation.IdRes
 import dev.unit6.healthypets.R
 
-enum class PetSize(@IdRes val stringId: Int) {
+enum class PetSize(val stringId: Int) {
     SMALL_X(R.string.SMALL_X),
     SMALL(R.string.SMALL),
     MEDIUM(R.string.MEDIUM),

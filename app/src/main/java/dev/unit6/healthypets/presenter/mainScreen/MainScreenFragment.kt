@@ -13,6 +13,7 @@ import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentMainScreenBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
+import dev.unit6.healthypets.presenter.MainFragmentDirections
 import javax.inject.Inject
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener {
@@ -76,22 +77,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
     }
 
     override fun onClickFeed(feed: FeedUi) {
-        viewModel.feedList.observe(viewLifecycleOwner) {
-            when(it){
-                is UiState.Success -> {
-                    Navigation.findNavController(requireView()).navigate(R.id.PINCodeResetFragment)
-                    val result = it.value.find { food ->
-                        food.id == feed.id
-                    }
-                }
-                is UiState.Failure -> {
-                    adapter.submitList(listOf())
-                }
-                is UiState.Loading -> {
-                    adapter.submitList(listOf())
-                }
-            }
-        }
+        val action = MainFragmentDirections.actionMainFragmentToFeedInfoFragment(feed.id)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onAttach(context: Context) {

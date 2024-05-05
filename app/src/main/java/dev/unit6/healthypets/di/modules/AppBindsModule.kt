@@ -10,6 +10,8 @@ import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
 import dev.unit6.healthypets.domain.GetAllFoodsUseCaseImpl
+import dev.unit6.healthypets.domain.GetFeedByIdUseCase
+import dev.unit6.healthypets.domain.GetFeedByIdUseCaseImpl
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
@@ -35,6 +37,12 @@ interface AppBindsModule {
     fun bindGetAllFoodsUseCase(
         useCase: GetAllFoodsUseCaseImpl
     ): GetAllFoodsUseCase
+
+    @Binds
+    @Singleton
+    fun bindGetFeedByIdUseCase(
+        useCase: GetFeedByIdUseCaseImpl
+    ): GetFeedByIdUseCase
 
     @Binds
     @Singleton

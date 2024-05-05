@@ -10,7 +10,7 @@
         android:id="@+id/button_back_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:src="@drawable/back_picture"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,9 +32,7 @@
             android:background="@drawable/like_fill_picture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/feed_imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="268dp"
-            tools:layout_editor_absoluteY="67dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/feed_imageView"
@@ -62,6 +60,8 @@
             android:layout_height="wrap_content"
             android:text="Корм Royal Canin для взрослых собак малых пород"
             android:textSize="20sp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textColor="@color/bastille"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +83,8 @@
             android:id="@+id/feed_options_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:paddingBottom="20dp"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
