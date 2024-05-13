@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.unit6.healthypets.R
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.domain.GetFeedByIdUseCase

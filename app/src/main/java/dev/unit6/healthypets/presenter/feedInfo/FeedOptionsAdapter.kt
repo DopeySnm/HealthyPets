@@ -2,30 +2,40 @@ package dev.unit6.healthypets.presenter.feedInfo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dev.unit6.healthypets.R
 import dev.unit6.healthypets.databinding.FeedOptionItemBinding
 
-class FeedOptionsAdapter(
+class FeedOptionsAdapter : RecyclerView.Adapter<FeedOptionsAdapter.FeedOptionsViewHolder>() {
 
-) : ListAdapter<FeedOptionUi, FeedOptionsAdapter.FeedOptionsViewHolder>(FeedOptionsDiffUtil()) {
+    private val list = mutableListOf<FeedOptionUi>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedOptionsViewHolder {
         return FeedOptionsViewHolder.create(parent)
     }
 
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    fun submitList(list: List<FeedOptionUi>) = with(this.list) {
+        addAll(list)
+    }
+
     override fun onBindViewHolder(holder: FeedOptionsViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(list[position])
     }
 
     class FeedOptionsViewHolder(
         private val binding: FeedOptionItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(option: FeedOptionUi) {
-            binding.nameTextView.text = option.name
-            binding.valueTextView.text = option.value
+        fun bind(option: FeedOptionUi) = binding.apply {
+            nameTextView.text = root.context.getString(option.nameStringId)
+
+            valueTextView.text = option.value?.let {
+                it
+            } ?: root.context.getString(R.string.empty_value)
         }
 
         companion object {
@@ -37,16 +47,6 @@ class FeedOptionsAdapter(
                         .inflate(LayoutInflater.from(parent.context), parent, false)
                 )
             }
-        }
-    }
-
-    class FeedOptionsDiffUtil : DiffUtil.ItemCallback<FeedOptionUi>() {
-        override fun areItemsTheSame(oldItem: FeedOptionUi, newItem: FeedOptionUi): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: FeedOptionUi, newItem: FeedOptionUi): Boolean {
-            return oldItem == newItem
         }
     }
 }

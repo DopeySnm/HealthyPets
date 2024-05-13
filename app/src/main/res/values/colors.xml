@@ -20,4 +20,5 @@
     <color name="hit_pink">#FFAD72</color>
     <color name="dark_gray">#7B8084</color>
     <color name="carmine">#980710</color>
+    <color name="transparent">#00000000</color>
 </resources>

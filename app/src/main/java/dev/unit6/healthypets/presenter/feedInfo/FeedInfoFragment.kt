@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -89,47 +90,47 @@ class FeedInfoFragment : Fragment(R.layout.fragment_feed_info) {
     private fun initializeFeedOptions(food: Food) {
         val listOptions = listOf(
             FeedOptionUi(
-                name = getString(R.string.type),
-                value = if (food.dry) getString(R.string.dry) else getString(R.string.empty_value)
+                nameStringId = R.string.type,
+                value = if (food.dry) getString(R.string.dry) else null
             ),
             FeedOptionUi(
-                name = getString(R.string.compound),
-                value = food.composition ?: getString(R.string.empty_value)
+                nameStringId = R.string.compound,
+                value = food.composition
             ),
             FeedOptionUi(
-                name = getString(R.string.age_range),
+                nameStringId = R.string.age_range,
                 value = food.ageRange.joinToString(", ", "", ".") {
                     getString(it.stringId)
                 }
             ),
             FeedOptionUi(
-                name = getString(R.string.weight_range),
+                nameStringId = R.string.weight_range,
                 value = food.weightRange.joinToString(separator = ", ", postfix = ".") {
                     getString(it.stringId)
                 }
             ),
             FeedOptionUi(
-                name = getString(R.string.type_protein),
-                value = food.typeProtein ?: getString(R.string.empty_value)
+                nameStringId = R.string.type_protein,
+                value = food.typeProtein
             ),
             FeedOptionUi(
-                name = getString(R.string.special_needs),
-                value = food.specialNeeds ?: getString(R.string.empty_value)
+                nameStringId = R.string.special_needs,
+                value = food.specialNeeds
             ),
             FeedOptionUi(
-                name = getString(R.string.minerals),
-                value = food.minerals ?: getString(R.string.empty_value)
+                nameStringId = R.string.minerals,
+                value = food.minerals
             ),
             FeedOptionUi(
-                name = getString(R.string.nutrients),
+                nameStringId = R.string.nutrients,
                 value = "${getString(R.string.proteins)} ${food.dryProtein}%, " +
                         "${getString(R.string.fats)} ${food.dryFat}%, " +
                         "${getString(R.string.minerals)} ${food.dryCarbon}%," +
                         "${getString(R.string.dietaryFiber)} ${food.dryCellulose}%."
             ),
             FeedOptionUi(
-                name = getString(R.string.manufacturer_country),
-                value = food.countryName ?: getString(R.string.empty_value)
+                nameStringId = R.string.manufacturer_country,
+                value = food.countryName
             ),
         )
         adapter.submitList(listOptions)
