@@ -12,6 +12,9 @@ class HealthyPetsRepositoryImpl @Inject constructor(
     private val service: HealthyPetsService,
     private val dao: FoodDao
 ): HealthyPetsRepository {
+    override suspend fun deleteFavoriteFood(idFood: Int) {
+        dao.deleteFavoriteFood(idFood)
+    }
 
     override suspend fun getAllFoods(): DataState<List<Food>> {
         kotlin.runCatching {
@@ -77,6 +80,11 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                 return DataState.Failure(it.message ?: "Unknown error")
             }
         )
+    }
+
+    override suspend fun getFavoriteFoodById(idFood: Int): FavoriteFoodEntity {
+       return dao.getFavoriteFoodById(idFood)
+    }
 
     override suspend fun saveFavoriteFood(idFood: Int) {
         dao.saveFavoriteFood(idFood)

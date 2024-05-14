@@ -1,0 +1,75 @@
+* [33m80f4956[m[33m ([m[1;31morigin/STAPP-197[m[33m, [m[1;32mSTAPP-197[m[33m)[m Refactoring feed info screen.
+* [33mf9fb165[m Add view complete feed information. Add transition from main screen and from full feed list screen to feed info screen.
+* [33m15d64c2[m Add feed info fragment, feed option adapter, feed option item.
+*   [33m806ff4b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'STAPP-196' into 'master'
+[32m|[m[33m\[m  
+[32m|[m * [33m8e3556f[m[33m ([m[1;31morigin/STAPP-196[m[33m, [m[1;32mSTAPP-196[m[33m)[m Update full list feeds.
+[32m|[m * [33m0255c17[m Update size full list feeds.
+[32m|[m * [33mc962495[m Add all feeds fragment. Updata feed item. Add item decoration for grid and for horizontal.
+[32m|[m[32m/[m  
+*   [33m858fc79[m Merge branch 'STAPP-194' into 'master'
+[34m|[m[35m\[m  
+[34m|[m * [33m9d9f16e[m[33m ([m[1;31morigin/STAPP-194[m[33m, [m[1;32mSTAPP-194[m[33m)[m Add config file and config helper.
+[34m|[m * [33m837bd62[m Add conversion method food to feedUi.
+[34m|[m * [33m03da87a[m Update food response to food. Fix name PinCodResetFramgent.
+[34m|[m * [33md580e07[m Add placeholder. Add petSize enum, petAge enum.
+[34m|[m * [33m4a93f66[m Add API integration. Add output 10 feeds in main screen. Add library for loading images.
+[34m|[m[34m/[m  
+[34m|[m * [33ma9fab24[m[33m ([m[1;36mHEAD -> [m[1;32mSTAPP-195[m[33m)[m Add favorite food db.
+[34m|[m[34m/[m  
+*   [33m6bd3980[m[33m ([m[1;32mmaster[m[33m)[m Merge branch 'STAPP-72' into 'master'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33mef2559b[m[33m ([m[1;31morigin/STAPP-72[m[33m, [m[1;32mSTAPP-72[m[33m)[m update pin code reset view
+[1;31m|[m * [33m0392297[m add reset pincode screen
+[1;31m|[m[1;31m/[m  
+*   [33mf7fd591[m Merge branch 'STAPP-69' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m3c942a2[m[33m ([m[1;31morigin/STAPP-69[m[33m, [m[1;32mSTAPP-69[m[33m)[m add splash screen in activity
+[1;33m|[m * [33mcd05dfb[m add splash screen
+[1;33m|[m * [33m6e72907[m STAPP-69 merge from master
+[1;33m|[m *   [33mdbcd813[m Merge branch 'master' into STAPP-69
+[1;33m|[m [1;35m|[m[1;36m\[m  
+[1;33m|[m * [1;36m|[m [33me1305d3[m STAPP-69 remove duplicate resource file
+[1;33m|[m * [1;36m|[m [33m290e810[m add navigation from pinCodeFragmetn to mainScreenFragment
+[1;33m|[m * [1;36m|[m [33mc166e74[m add main screen viewmodel, update feed list adapter, feed listener, distributed cards into files, update button style, update text style in main screen
+[1;33m|[m * [1;36m|[m [33m23ac5ca[m add like image to feed
+[1;33m|[m * [1;36m|[m [33m34a6e56[m add styles in main screen
+[1;33m|[m * [1;36m|[m [33m22404a7[m add main screen, add list feed with adapter
+[1;33m|[m * [1;36m|[m [33m270a50b[m add exception, and LF line endings
+[1;33m|[m * [1;36m|[m [33mc29d333[m added pin code input logic, pin code screen, navigation, pin code viewmodel
+[1;33m|[m * [1;36m|[m [33m0a3dd20[m added 3 splash screen options
+* [1;36m|[m [1;36m|[m   [33mae75c02[m Merge branch 'STAPP-74' into 'master'
+[1;36m|[m[32m\[m [1;36m\[m [1;36m\[m  
+[1;36m|[m [32m|[m[1;36m_[m[1;36m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m[32m|[m [1;36m|[m   
+[1;36m|[m * [1;36m|[m [33md6aa1eb[m STAPP-74 update bottom navigation bar by figma
+[1;36m|[m * [1;36m|[m [33ma2090bd[m[33m ([m[1;31morigin/STAPP-74[m[33m, [m[1;32mSTAPP-74[m[33m)[m add attibutes navbar
+[1;36m|[m * [1;36m|[m [33m5c4fc19[m add bottom nvigation
+[1;36m|[m[1;36m/[m [1;36m/[m  
+* [1;36m|[m   [33m50a2223[m Merge branch 'STAPP-71' into 'master'
+[33m|[m[34m\[m [1;36m\[m  
+[33m|[m * [1;36m|[m [33mb78a015[m[33m ([m[1;31morigin/STAPP-71[m[33m, [m[1;32mSTAPP-71[m[33m)[m fix pin code
+[33m|[m * [1;36m|[m [33ma556a13[m Updating pincode entry after wrong, not match. Add id to entity pincode. Update provide context.
+[33m|[m * [1;36m|[m [33m090574c[m add save pincode, add save first run, add sharedPreference, add pincodeState, add db, add dao
+[33m|[m * [1;36m|[m [33m1659fc8[m add di, domain, bcrypt library, repo interface, data state, ui state
+[33m|[m[33m/[m [1;36m/[m  
+* [1;36m|[m   [33mc791239[m Merge branch 'STAPP-73' into 'master'
+[35m|[m[36m\[m [1;36m\[m  
+[35m|[m * [1;36m|[m [33mc959c38[m[33m ([m[1;31morigin/STAPP-73[m[33m, [m[1;32mSTAPP-73[m[33m)[m add navigation from pinCodeFragmetn to mainScreenFragment
+[35m|[m * [1;36m|[m [33mf7327b6[m add main screen viewmodel, update feed list adapter, feed listener, distributed cards into files, update button style, update text style in main screen
+[35m|[m * [1;36m|[m [33m027f47d[m add like image to feed
+[35m|[m * [1;36m|[m [33mb19d0e1[m add styles in main screen
+[35m|[m * [1;36m|[m [33m7986a26[m add main screen, add list feed with adapter
+[35m|[m[35m/[m [1;36m/[m  
+* [1;36m|[m   [33m2d7c3a8[m Merge branch 'STAPP-70' into 'master'
+[1;36m|[m[1;32m\[m [1;36m\[m  
+[1;36m|[m [1;32m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m[1;32m|[m   
+[1;36m|[m * [33mbca6bbe[m add exception, and LF line endings
+[1;36m|[m * [33m07ddb81[m added pin code input logic, pin code screen, navigation, pin code viewmodel
+[1;36m|[m[1;36m/[m  
+*   [33m094a40a[m Merge branch 'STAPP-68' into 'master'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33mb74adcc[m done
+[1;33m|[m[1;33m/[m  
+* [33mbf6e211[m STAPP-68: feat: initialize project from template.

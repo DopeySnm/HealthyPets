@@ -45,7 +45,7 @@ interface AppBindsModule {
     fun bindGetFeedByIdUseCase(
         useCase: GetFeedByIdUseCaseImpl
     ): GetFeedByIdUseCase
-    
+
     @Binds
     @Singleton
     fun bindSaveFavoriteFoodUseCase(

@@ -11,6 +11,9 @@ interface FoodDao {
     @Upsert
     suspend fun saveFavoriteFood(idFood: Int)
 
-    @Query("SELECT * FROM favoriteFood")
-    suspend fun getAllFavoriteFoods(): List<FavoriteFoodEntity>
+    @Query("DELETE FROM favoriteFood WHERE idFood = :idFood")
+    suspend fun deleteFavoriteFood(idFood: Int)
+
+    @Query("SELECT * FROM favoriteFood WHERE idFood = :idFood")
+    suspend fun getFavoriteFoodById(idFood: Int): FavoriteFoodEntity
 }
