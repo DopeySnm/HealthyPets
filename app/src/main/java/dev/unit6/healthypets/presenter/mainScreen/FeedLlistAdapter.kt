@@ -27,7 +27,7 @@ class FeedListAdapter(
         private val feedListener: FeedListener,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(feed: FeedUi) {
-            binding.nameFeedTextView.text = feed.name
+            binding.nameFeedTextView.text = feed.name.trimStart()
 
             if (feed.imageUrl != null) {
                 Picasso
@@ -44,6 +44,10 @@ class FeedListAdapter(
             setLikeBackground(feed.like)
             binding.buyButton.setOnClickListener {
                 feedListener.onBuyClick(feed)
+            }
+
+            binding.root.setOnClickListener {
+                feedListener.onClickFeed(feed)
             }
 
             binding.likeImageView.setOnClickListener {

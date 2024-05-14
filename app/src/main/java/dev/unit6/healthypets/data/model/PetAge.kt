@@ -1,9 +1,8 @@
 package dev.unit6.healthypets.data.model
 
-import androidx.annotation.IdRes
 import dev.unit6.healthypets.R
 
-enum class PetAge(@IdRes val stringId: Int) {
+enum class PetAge(val stringId: Int) {
     CUB(R.string.CUB),
     CUB_1(R.string.CUB_1),
     CUB_2(R.string.CUB_2),

@@ -3,13 +3,10 @@ package dev.unit6.healthypets.presenter.fullListFeeds
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.data.state.UiState
@@ -38,11 +35,15 @@ class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedL
 
         viewModel.feedList.observe(viewLifecycleOwner) {
             when(it) {
-                is UiState.Success -> adapter.submitList(it.value)
+                is UiState.Success -> {
+                    val result = it.value.map { food ->
+                        food.toFeedUI()
+                    }
+                    adapter.submitList(result)
+                }
                 is UiState.Failure -> adapter.submitList(listOf())
                 is UiState.Loading -> adapter.submitList(listOf())
             }
-
         }
 
         viewModel.loadFeedList()
@@ -77,6 +78,11 @@ class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedL
 
     override fun onLikeClick(feed: FeedUi) {
         feed.like = feed.like.not()
+    }
+
+    override fun onClickFeed(feed: FeedUi) {
+        val action = FullListFeedsFragmentDirections.actionFullListFeedsFragmentToFeedInfoFragment(feed.id)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onAttach(context: Context) {

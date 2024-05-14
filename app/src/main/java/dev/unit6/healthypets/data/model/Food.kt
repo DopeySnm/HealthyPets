@@ -10,17 +10,19 @@ data class Food(
     val composition: String?,
     val ageRange: List<PetAge>,
     val weightRange: List<PetSize>,
-    val typeProtein: String,
-    val specialNeeds: String,
+    val typeProtein: String?,
+    val specialNeeds: String?,
     val minerals: String?,
     val dryProtein: Double,
     val dryFat: Double,
     val dryCarbon: Double,
     val dryCellulose: Double,
-    val countryName: String?
+    val countryName: String?,
+    var like: Boolean = false
 ) {
     fun toFeedUI(): FeedUi {
         return FeedUi(
+            this.id,
             this.name,
             this.urlImage,
             false

@@ -13,6 +13,7 @@ import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentMainScreenBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
+import dev.unit6.healthypets.presenter.MainFragmentDirections
 import javax.inject.Inject
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener {
@@ -30,7 +31,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
         viewModel.feedList.observe(viewLifecycleOwner) {
             when(it){
-                is UiState.Success -> adapter.submitList(it.value)
+                is UiState.Success -> {
+                    val result = it.value.map { food ->
+                            food.toFeedUI()
+                        }
+                    adapter.submitList(result)
+                }
                 is UiState.Failure -> adapter.submitList(listOf())
                 is UiState.Loading -> adapter.submitList(listOf())
             }
@@ -68,6 +74,11 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
 
     override fun onLikeClick(feed: FeedUi) {
         feed.like = feed.like.not()
+    }
+
+    override fun onClickFeed(feed: FeedUi) {
+        val action = MainFragmentDirections.actionMainFragmentToFeedInfoFragment(feed.id)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onAttach(context: Context) {

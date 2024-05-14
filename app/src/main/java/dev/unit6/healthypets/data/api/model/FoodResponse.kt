@@ -47,7 +47,10 @@ data class FoodResponse(
     val vetDiet: Boolean
 ) {
     fun toFood(urlImage: String?): Food {
-        val typeProtein = this.proteins.joinToString(", ") { it.name } + "."
+        val typeProtein = this.proteins
+            .joinToString(", ", postfix = ".") { it.name }.takeUnless {
+                it == "."
+            }
 
         val ageRange = this.growthPhases.map {
             PetAge.transform(it)
@@ -57,7 +60,10 @@ data class FoodResponse(
             PetSize.transform(it)
         }
 
-        val specialNeeds = this.specialDiets.joinToString(", ") { it.name } + "."
+        val specialNeeds = this.specialDiets
+            .joinToString(", ", postfix = ".") { it.name }.takeUnless {
+                it == "."
+            }
 
         return Food(
             id = this.id,

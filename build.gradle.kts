@@ -4,4 +4,5 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.googleKsp) apply false
     alias(libs.plugins.kotlinKapt) apply false
+    alias(libs.plugins.safeargs)apply false
 }

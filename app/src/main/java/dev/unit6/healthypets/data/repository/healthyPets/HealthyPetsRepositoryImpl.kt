@@ -3,6 +3,8 @@ package dev.unit6.healthypets.data.repository.healthyPets
 import dev.unit6.healthypets.data.api.HealthyPetsService
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -45,6 +47,30 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                 return if (it.isSuccessful) {
                     DataState.Success(it.raw().request.url.toString())
                 } else DataState.Failure("Unable to get image")
+            },
+            onFailure = {
+                return DataState.Failure(it.message ?: "Unknown error")
+            }
+        )
+    }
+
+    override suspend fun getFoodById(id: Int): DataState<Food> {
+        kotlin.runCatching {
+            service.getFoodById(id)
+        }.fold(
+            onSuccess = { response ->
+                return if (response.isSuccessful) {
+                    response.body()?.let { food ->
+                        val imageUrl = getImage(food.image).let {
+                            if (it is DataState.Success) {
+                                it.value
+                            } else {
+                                null
+                            }
+                        }
+                        DataState.Success(food.toFood(imageUrl))
+                    } ?: DataState.Failure("Empty response")
+                } else DataState.Failure("Unable to get food")
             },
             onFailure = {
                 return DataState.Failure(it.message ?: "Unknown error")
