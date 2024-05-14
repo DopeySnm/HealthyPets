@@ -39,9 +39,7 @@ class MainScreenViewModel @Inject constructor(
     fun loadFeedList() {
         viewModelScope.launch {
             val foods = getAllFoods()
-            foods.let {
-                _feedList.postValue(UiState.fromDataState(it))
-            }
+            _feedList.postValue(UiState.fromDataState(foods))
         }
     }
 

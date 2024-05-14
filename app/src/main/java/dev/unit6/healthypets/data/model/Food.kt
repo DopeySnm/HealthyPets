@@ -18,7 +18,7 @@ data class Food(
     val dryCarbon: Double,
     val dryCellulose: Double,
     val countryName: String?,
-    val favorite: Boolean,
+    var favorite: Boolean,
 ) {
     fun toFeedUI(): FeedUi {
         return FeedUi(

@@ -19,6 +19,7 @@ import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentFeedInfoBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
+import dev.unit6.healthypets.presenter.mainScreen.FeedUi
 import javax.inject.Inject
 
 class FeedInfoFragment : Fragment(R.layout.fragment_feed_info) {
@@ -70,10 +71,9 @@ class FeedInfoFragment : Fragment(R.layout.fragment_feed_info) {
     }
 
     private fun initializeFeedHeader(food: Food) {
-        setLikeBackground(food.like)
+        setLikeBackground(food.favorite)
         binding.likeImageView.setOnClickListener {
-            food.like = !food.like
-            setLikeBackground(food.like)
+            onLikeClick(food)
         }
 
         binding.nameTextView.text = food.name.trimStart()
@@ -134,6 +134,16 @@ class FeedInfoFragment : Fragment(R.layout.fragment_feed_info) {
             ),
         )
         adapter.submitList(listOptions)
+    }
+
+    private fun onLikeClick(food: Food) {
+        food.favorite = food.favorite.not()
+        if (food.favorite) {
+            viewModel.saveFavoriteFood(food.id)
+        } else {
+            viewModel.deleteFavoriteFood(food.id)
+        }
+        setLikeBackground(food.favorite)
     }
 
     private fun setLikeBackground(like: Boolean) {
