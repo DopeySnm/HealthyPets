@@ -8,6 +8,8 @@ import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepository
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepositoryImpl
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
+import dev.unit6.healthypets.domain.DeleteFavoriteFoodUseCase
+import dev.unit6.healthypets.domain.DeleteFavoriteFoodUseCaseImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
 import dev.unit6.healthypets.domain.GetAllFoodsUseCaseImpl
 import dev.unit6.healthypets.domain.GetFeedByIdUseCase
@@ -51,6 +53,12 @@ interface AppBindsModule {
     fun bindSaveFavoriteFoodUseCase(
         useCase: SaveFavoriteFoodUseCaseImpl
     ): SaveFavoriteFoodUseCase
+
+    @Binds
+    @Singleton
+    fun bindDeleteFavoriteFoodUseCase(
+        useCase: DeleteFavoriteFoodUseCaseImpl
+    ) : DeleteFavoriteFoodUseCase
 
     @Binds
     @Singleton

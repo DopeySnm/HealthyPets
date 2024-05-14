@@ -15,5 +15,5 @@ import dev.unit6.healthypets.data.db.model.PinCodeEntity
 abstract class PetsHealthyDatabase : RoomDatabase() {
     abstract fun pinCodeDao(): PinCodeDao
 
-    abstract fun foodDao(): FoodDao
+    abstract fun favoriteFoodDao(): FavoriteFoodDao
 }

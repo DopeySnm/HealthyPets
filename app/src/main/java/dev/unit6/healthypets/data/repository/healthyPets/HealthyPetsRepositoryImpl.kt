@@ -1,16 +1,15 @@
 package dev.unit6.healthypets.data.repository.healthyPets
 
 import dev.unit6.healthypets.data.api.HealthyPetsService
+import dev.unit6.healthypets.data.db.FavoriteFoodDao
+import dev.unit6.healthypets.data.db.model.FavoriteFoodEntity
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
 import javax.inject.Inject
-import dev.unit6.healthypets.data.db.FoodDao
-import dev.unit6.healthypets.data.db.model.FavoriteFoodEntity
-
 
 class HealthyPetsRepositoryImpl @Inject constructor(
     private val service: HealthyPetsService,
-    private val dao: FoodDao
+    private val dao: FavoriteFoodDao
 ): HealthyPetsRepository {
     override suspend fun deleteFavoriteFood(idFood: Int) {
         dao.deleteFavoriteFood(idFood)
@@ -31,7 +30,16 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                                     null
                                 }
                             }
-                            food.toFood(imageUrl)
+
+                            val favorite = getFavoriteFoodById(food.id).let {
+                                if (it is DataState.Success) {
+                                    it.value
+                                } else {
+                                    false
+                                }
+                            }
+
+                            food.toFood(imageUrl, favorite)
                         }
                         DataState.Success(result)
                     } ?: DataState.Failure("Empty response")
@@ -72,7 +80,16 @@ class HealthyPetsRepositoryImpl @Inject constructor(
                                 null
                             }
                         }
-                        DataState.Success(food.toFood(imageUrl))
+
+                        val favorite = getFavoriteFoodById(food.id).let {
+                            if (it is DataState.Success) {
+                                it.value
+                            } else {
+                                false
+                            }
+                        }
+
+                        DataState.Success(food.toFood(imageUrl, favorite))
                     } ?: DataState.Failure("Empty response")
                 } else DataState.Failure("Unable to get food")
             },
@@ -82,11 +99,22 @@ class HealthyPetsRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getFavoriteFoodById(idFood: Int): FavoriteFoodEntity {
-       return dao.getFavoriteFoodById(idFood)
+    override suspend fun getFavoriteFoodById(idFood: Int): DataState<Boolean> {
+        kotlin.runCatching {
+            dao.getFavoriteFoodById(idFood)
+        }.fold(
+            onSuccess = {
+                it?.let {
+                    return DataState.Success(true)
+                } ?: return DataState.Success(false)
+            },
+            onFailure = {
+                return DataState.Failure(it.message ?: "Unknown error")
+            }
+        )
     }
 
     override suspend fun saveFavoriteFood(idFood: Int) {
-        dao.saveFavoriteFood(idFood)
+        dao.saveFavoriteFood(FavoriteFoodEntity(idFood = idFood))
     }
 }

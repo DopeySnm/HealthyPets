@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dev.unit6.healthypets.data.db.FavoriteFoodDao
 import dev.unit6.healthypets.data.db.PetsHealthyDatabase
 import dev.unit6.healthypets.data.db.PinCodeDao
 
@@ -19,7 +20,12 @@ class DataBaseModule {
 
 
     @Provides
-    fun provideCurrencyDao(db: PetsHealthyDatabase): PinCodeDao {
+    fun providePinCodeDao(db: PetsHealthyDatabase): PinCodeDao {
         return db.pinCodeDao()
+    }
+
+    @Provides
+    fun provideFavoriteFoodDao(db: PetsHealthyDatabase): FavoriteFoodDao {
+        return db.favoriteFoodDao()
     }
 }

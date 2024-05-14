@@ -13,7 +13,7 @@ interface HealthyPetsRepository {
 
     suspend fun deleteFavoriteFood(idFood: Int)
 
-    suspend fun getFavoriteFoodById(idFood: Int): FavoriteFoodEntity
+    suspend fun getFavoriteFoodById(idFood: Int): DataState<Boolean>
 
     suspend fun saveFavoriteFood(idFood: Int)
 }

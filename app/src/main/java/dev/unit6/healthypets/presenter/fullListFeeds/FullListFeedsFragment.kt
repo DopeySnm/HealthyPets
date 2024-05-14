@@ -78,6 +78,11 @@ class FullListFeedsFragment : Fragment(R.layout.fragment_full_list_feeds), FeedL
 
     override fun onLikeClick(feed: FeedUi) {
         feed.like = feed.like.not()
+        if (feed.like) {
+            viewModel.saveFavoriteFood(feed.id)
+        } else {
+            viewModel.deleteFavoriteFood(feed.id)
+        }
     }
 
     override fun onClickFeed(feed: FeedUi) {
