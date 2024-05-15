@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/solitude"
+    tools:context=".presenter.profile.ProfileFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textColor="@color/bastille"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_photo_ImageView"
+        android:layout_width="109dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="20dp"
+        app:shapeAppearanceOverlay="@style/ImageCircle"
+        android:src="@drawable/profile_empty_photo_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_TextView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_photo_selector_ImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile_camera_picture"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_photo_ImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_photo_ImageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/material_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="User1368"
+        android:textColor="@color/bastille"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_photo_ImageView"
+        app:layout_constraintStart_toStartOf="@+id/profile_photo_ImageView"
+        app:layout_constraintTop_toBottomOf="@+id/profile_photo_selector_ImageView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_options_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:clipToPadding="false"
+        android:paddingBottom="?attr/navbar_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/material_TextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
