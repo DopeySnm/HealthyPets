@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextInputLayout" parent="">
+        <item name="boxStrokeColor">@color/dark_solitude</item>
+        <item name="hintTextColor">@color/link_water</item>
+        <item name="helperTextTextColor">@color/link_water</item>
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+    </style>
+</resources>
