@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 )
 data class FavoriteFoodEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-    val idFood: Int
+    val id: Int = 0,
+    val foodId: Int
 )

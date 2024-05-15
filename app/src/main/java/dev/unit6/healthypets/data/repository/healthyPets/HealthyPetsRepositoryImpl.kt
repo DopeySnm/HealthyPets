@@ -11,8 +11,8 @@ class HealthyPetsRepositoryImpl @Inject constructor(
     private val service: HealthyPetsService,
     private val dao: FavoriteFoodDao
 ): HealthyPetsRepository {
-    override suspend fun deleteFavoriteFood(idFood: Int) {
-        dao.deleteFavoriteFood(idFood)
+    override suspend fun deleteFavoriteFood(foodId: Int) {
+        dao.deleteFavoriteFood(foodId)
     }
 
     override suspend fun getAllFoods(): DataState<List<Food>> {
@@ -22,7 +22,7 @@ class HealthyPetsRepositoryImpl @Inject constructor(
             onSuccess = { response->
                 return if (response.isSuccessful) {
                     response.body()?.let { foods ->
-                        val result = foods.map { food ->
+                        val result = foods.take(10).map { food ->
                             val imageUrl = getImage(food.image).let {
                                 if (it is DataState.Success) {
                                     it.value
@@ -114,7 +114,7 @@ class HealthyPetsRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun saveFavoriteFood(idFood: Int) {
-        dao.saveFavoriteFood(FavoriteFoodEntity(idFood = idFood))
+    override suspend fun saveFavoriteFood(foodId: Int) {
+        dao.saveFavoriteFood(FavoriteFoodEntity(foodId = foodId))
     }
 }
