@@ -8,12 +8,16 @@ import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepository
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepositoryImpl
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
+import dev.unit6.healthypets.domain.DislikeFoodUseCase
+import dev.unit6.healthypets.domain.DislikeFoodUseCaseImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
 import dev.unit6.healthypets.domain.GetAllFoodsUseCaseImpl
 import dev.unit6.healthypets.domain.GetFeedByIdUseCase
 import dev.unit6.healthypets.domain.GetFeedByIdUseCaseImpl
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCaseImpl
+import dev.unit6.healthypets.domain.LikeFoodUseCase
+import dev.unit6.healthypets.domain.LikeFoodUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCaseImpl
 import javax.inject.Singleton
@@ -43,6 +47,18 @@ interface AppBindsModule {
     fun bindGetFeedByIdUseCase(
         useCase: GetFeedByIdUseCaseImpl
     ): GetFeedByIdUseCase
+
+    @Binds
+    @Singleton
+    fun bindLikeFoodUseCase(
+        useCase: LikeFoodUseCaseImpl
+    ): LikeFoodUseCase
+
+    @Binds
+    @Singleton
+    fun bindDislikeFoodUseCase(
+        useCase: DislikeFoodUseCaseImpl
+    ) : DislikeFoodUseCase
 
     @Binds
     @Singleton

@@ -4,5 +4,5 @@ data class FeedUi(
     val id: Int,
     val name: String,
     val imageUrl: String?,
-    var like: Boolean
+    var favorite: Boolean
 )

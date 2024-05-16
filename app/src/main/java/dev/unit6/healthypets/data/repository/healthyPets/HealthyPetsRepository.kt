@@ -9,4 +9,10 @@ interface HealthyPetsRepository {
     suspend fun getImage(name: String): DataState<String>
 
     suspend fun getFoodById(id: Int): DataState<Food>
+
+    suspend fun deleteFavoriteFood(foodId: Int)
+
+    suspend fun getFavoriteFoodById(idFood: Int): DataState<Boolean>
+
+    suspend fun saveFavoriteFood(foodId: Int)
 }

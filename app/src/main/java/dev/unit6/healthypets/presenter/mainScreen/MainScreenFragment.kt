@@ -73,7 +73,12 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen), FeedListener
     }
 
     override fun onLikeClick(feed: FeedUi) {
-        feed.like = feed.like.not()
+        feed.favorite = feed.favorite.not()
+        if (feed.favorite) {
+            viewModel.saveFavoriteFood(feed.id)
+        } else {
+            viewModel.deleteFavoriteFood(feed.id)
+        }
     }
 
     override fun onClickFeed(feed: FeedUi) {

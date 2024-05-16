@@ -18,14 +18,14 @@ data class Food(
     val dryCarbon: Double,
     val dryCellulose: Double,
     val countryName: String?,
-    var like: Boolean = false
+    var favorite: Boolean,
 ) {
     fun toFeedUI(): FeedUi {
         return FeedUi(
             this.id,
             this.name,
             this.urlImage,
-            false
+            this.favorite
         )
     }
 }

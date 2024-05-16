@@ -1,6 +1,5 @@
 package dev.unit6.healthypets.data.api.model
 
-
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.model.PetAge
 import dev.unit6.healthypets.data.model.PetSize
@@ -46,7 +45,7 @@ data class FoodResponse(
     val specialDiets: List<SpecialDietResponse>,
     val vetDiet: Boolean
 ) {
-    fun toFood(urlImage: String?): Food {
+    fun toFood(urlImage: String?, favorite: Boolean): Food {
         val typeProtein = this.proteins
             .joinToString(", ", postfix = ".") { it.name }.takeUnless {
                 it == "."
@@ -80,7 +79,8 @@ data class FoodResponse(
             composition = this.ingredientsDescription,
             minerals = this.extraSubstances,
             specialNeeds = specialNeeds,
-            urlImage = urlImage
+            urlImage = urlImage,
+            favorite = favorite
         )
     }
 
