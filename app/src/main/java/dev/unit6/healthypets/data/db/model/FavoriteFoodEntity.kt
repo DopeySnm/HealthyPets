@@ -11,3 +11,7 @@ data class FavoriteFoodEntity(
     val id: Int = 0,
     val foodId: Int
 )
+
+data class FoodId(
+    val foodId: Int
+)
