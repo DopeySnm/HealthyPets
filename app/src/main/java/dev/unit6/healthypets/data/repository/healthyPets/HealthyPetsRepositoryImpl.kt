@@ -3,6 +3,7 @@ package dev.unit6.healthypets.data.repository.healthyPets
 import dev.unit6.healthypets.data.api.HealthyPetsService
 import dev.unit6.healthypets.data.db.FavoriteFoodDao
 import dev.unit6.healthypets.data.db.model.FavoriteFoodEntity
+import dev.unit6.healthypets.data.db.model.FoodId
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class HealthyPetsRepositoryImpl @Inject constructor(
     private val dao: FavoriteFoodDao
 ): HealthyPetsRepository {
     override suspend fun deleteFavoriteFood(foodId: Int) {
-        dao.deleteFavoriteFood(foodId)
+        dao.deleteFavoriteFood(FoodId(foodId))
     }
 
     override suspend fun getAllFoods(): DataState<List<Food>> {
@@ -22,7 +23,7 @@ class HealthyPetsRepositoryImpl @Inject constructor(
             onSuccess = { response->
                 return if (response.isSuccessful) {
                     response.body()?.let { foods ->
-                        val result = foods.take(10).map { food ->
+                        val result = foods.map { food ->
                             val imageUrl = getImage(food.image).let {
                                 if (it is DataState.Success) {
                                     it.value
