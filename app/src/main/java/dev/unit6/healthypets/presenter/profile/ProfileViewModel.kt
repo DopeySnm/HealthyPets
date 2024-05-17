@@ -7,11 +7,14 @@ import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.domain.GetPersonalInfoUseCase
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
+import androidx.lifecycle.viewModelScope
+import dev.unit6.healthypets.domain.WipeDataUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
-    private val getPersonalInfo: GetPersonalInfoUseCase
+    private val getPersonalInfo: GetPersonalInfoUseCase,
+    private val wipeData: WipeDataUseCase
 ) : ViewModel() {
 
     private val _personalInfo = MutableLiveData<UiState<PersonalInfoUi>>(UiState.Loading)
@@ -27,4 +30,9 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun wipeData() {
+        viewModelScope.launch {
+            wipeData.invoke()
+        }
+    }
 }

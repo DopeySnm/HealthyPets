@@ -33,6 +33,11 @@
             android:id="@+id/action_mainFragment_to_feedInfoFragment"
             app:destination="@id/feedInfoFragment" />
         <action
+            app:popUpTo="@+id/main_graph"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_mainFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_personalInfoFragment"
             app:destination="@id/personalInfoFragment" />
     </fragment>

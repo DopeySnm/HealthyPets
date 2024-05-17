@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dev.unit6.healthypets.data.preference.PreferenceProvider
 import dev.unit6.healthypets.data.preference.PreferenceProviderImpl
+import dev.unit6.healthypets.data.repository.dataManagement.DataManagementRepository
+import dev.unit6.healthypets.data.repository.dataManagement.DataManagementRepositoryImpl
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepository
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepositoryImpl
 import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepository
@@ -26,6 +28,8 @@ import dev.unit6.healthypets.domain.SavePersonalInfoUseCase
 import dev.unit6.healthypets.domain.SavePersonalInfoUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCaseImpl
+import dev.unit6.healthypets.domain.WipeDataUseCase
+import dev.unit6.healthypets.domain.WipeDataUseCaseImpl
 import javax.inject.Singleton
 
 @Module
@@ -86,6 +90,13 @@ interface AppBindsModule {
 
     @Binds
     @Singleton
+    fun bindWipeDataUseCase(
+        useCase: WipeDataUseCaseImpl
+    ) : WipeDataUseCase
+
+
+    @Binds
+    @Singleton
     fun bindPinCodeRepository(
         repository: PinCodeRepositoryImpl
     ) : PinCodeRepository
@@ -95,6 +106,12 @@ interface AppBindsModule {
     fun bindHealthyPetsRepository(
         repository: HealthyPetsRepositoryImpl
     ) : HealthyPetsRepository
+
+    @Binds
+    @Singleton
+    fun bindDataManagementRepository(
+        repository: DataManagementRepositoryImpl
+    ) : DataManagementRepository
 
     @Binds
     @Singleton

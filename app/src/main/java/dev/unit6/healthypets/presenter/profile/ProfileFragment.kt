@@ -17,6 +17,7 @@ import dev.unit6.healthypets.databinding.FragmentProfileBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
+import dev.unit6.healthypets.presenter.MainFragmentDirections
 import javax.inject.Inject
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -47,11 +48,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         initializeUI()
-    }
-
-    override fun onAttach(context: Context) {
-        context.appComponent.inject(this)
-        super.onAttach(context)
     }
 
     private fun initializeUI() {
@@ -98,7 +94,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ),
             ProfileOptionUi(
                 name = getString(R.string.exit),
-                action = {  }
+                action = { onClickExit() }
             )
         )
 
@@ -107,6 +103,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun onClickPersonalInfo() {
         Navigation.findNavController(requireView()).navigate(R.id.personalInfoFragment)
+    }
+
+    private fun onClickExit() {
+        viewModel.wipeData()
+        val action = MainFragmentDirections.actionMainFragmentToAuthFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun initializeRecycler() = with(binding.profileOptionsRecyclerView) {
@@ -122,6 +124,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ContextCompat.getDrawable(requireContext(), R.drawable.profile_options_item_decorator)
                 ?.let { this@apply.setDrawable(it) }
         }
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     companion object {
         @JvmStatic
