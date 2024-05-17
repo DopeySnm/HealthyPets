@@ -37,31 +37,31 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val options = listOf(
             ProfileOptionUi(
                 name = getString(R.string.personal_info),
-                action = { onClickPersonalInfo() }
+                action = {  }
             ),
             ProfileOptionUi(
                 name = getString(R.string.my_pets),
-                action = { onClickMyPets() }
+                action = {  }
             ),
             ProfileOptionUi(
                 name = getString(R.string.payment_method),
-                action = { onClickPaymentMethod() }
+                action = {  }
             ),
             ProfileOptionUi(
                 name = getString(R.string.settings),
-                action = { onClickSettings() }
+                action = {  }
             ),
             ProfileOptionUi(
                 name = getString(R.string.support),
-                action = { onClickSupport() }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.about_app),
-                action = { onClickAboutApp() }
+                action = {  }
             ),
             ProfileOptionUi(
                 name = getString(R.string.exit),
-                action = { onClickExit() }
+                action = {  }
             )
         )
 
@@ -81,34 +81,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ContextCompat.getDrawable(requireContext(), R.drawable.profile_options_item_decorator)
                 ?.let { this@apply.setDrawable(it) }
         }
-
-    private fun onClickPersonalInfo() {
-        TODO()
-    }
-
-    private fun onClickMyPets() {
-        TODO()
-    }
-
-    private fun onClickPaymentMethod() {
-        TODO()
-    }
-
-    private fun onClickSettings() {
-        TODO()
-    }
-
-    private fun onClickSupport() {
-        TODO()
-    }
-
-    private fun onClickAboutApp() {
-        TODO()
-    }
-
-    private fun onClickExit() {
-        TODO()
-    }
 
     companion object {
         @JvmStatic
