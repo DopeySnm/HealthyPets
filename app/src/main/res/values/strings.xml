@@ -69,4 +69,11 @@
     <string name="special_needs">Особые потребности</string>
     <string name="nutrients">Питательные вещества</string>
     <string name="manufacturer_country">Страна производитель</string>
+    <string name="exit">Выход</string>
+    <string name="personal_info">Личная информация</string>
+    <string name="my_pets">Мои питомцы</string>
+    <string name="payment_method">Способы оплаты</string>
+    <string name="settings">Настройки</string>
+    <string name="support">Поддержка</string>
+    <string name="about_app">О приложении</string>
 </resources>
