@@ -4,14 +4,16 @@ import dagger.Binds
 import dagger.Module
 import dev.unit6.healthypets.data.preference.PreferenceProvider
 import dev.unit6.healthypets.data.preference.PreferenceProviderImpl
-import dev.unit6.healthypets.data.repository.dataManagement.DataManagementRepository
-import dev.unit6.healthypets.data.repository.dataManagement.DataManagementRepositoryImpl
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepository
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepositoryImpl
 import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepository
 import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepositoryImpl
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
+import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCase
+import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCaseImpl
+import dev.unit6.healthypets.domain.ClearPinCodeUseCase
+import dev.unit6.healthypets.domain.ClearPinCodeUseCaseImpl
 import dev.unit6.healthypets.domain.DislikeFoodUseCase
 import dev.unit6.healthypets.domain.DislikeFoodUseCaseImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
@@ -97,6 +99,18 @@ interface AppBindsModule {
 
     @Binds
     @Singleton
+    fun bindClearFavoriteFoodUseCase(
+        useCase: ClearFavoriteFoodUseCaseImpl
+    ) : ClearFavoriteFoodUseCase
+
+    @Binds
+    @Singleton
+    fun bindClearPinCodeUseCase(
+        useCase: ClearPinCodeUseCaseImpl
+    ) : ClearPinCodeUseCase
+
+    @Binds
+    @Singleton
     fun bindPinCodeRepository(
         repository: PinCodeRepositoryImpl
     ) : PinCodeRepository
@@ -106,12 +120,6 @@ interface AppBindsModule {
     fun bindHealthyPetsRepository(
         repository: HealthyPetsRepositoryImpl
     ) : HealthyPetsRepository
-
-    @Binds
-    @Singleton
-    fun bindDataManagementRepository(
-        repository: DataManagementRepositoryImpl
-    ) : DataManagementRepository
 
     @Binds
     @Singleton

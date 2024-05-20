@@ -1,6 +1,5 @@
 package dev.unit6.healthypets.domain
 
-import dev.unit6.healthypets.data.repository.dataManagement.DataManagementRepository
 import javax.inject.Inject
 
 interface WipeDataUseCase {
@@ -8,9 +7,11 @@ interface WipeDataUseCase {
 }
 
 class WipeDataUseCaseImpl @Inject constructor(
-    private val repository: DataManagementRepository
+    private val clearFavoriteFood: ClearFavoriteFoodUseCase,
+    private val clearPinCodeUseCase: ClearPinCodeUseCase
 ) : WipeDataUseCase{
     override suspend fun invoke() {
-        repository.wipeData()
+        clearFavoriteFood.invoke()
+        clearPinCodeUseCase.invoke()
     }
 }

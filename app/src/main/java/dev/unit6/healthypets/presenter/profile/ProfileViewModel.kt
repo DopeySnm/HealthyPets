@@ -9,6 +9,7 @@ import dev.unit6.healthypets.domain.GetPersonalInfoUseCase
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
 import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.domain.WipeDataUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +32,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun wipeData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             wipeData.invoke()
         }
     }

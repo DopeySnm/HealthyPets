@@ -15,4 +15,6 @@ interface HealthyPetsRepository {
     suspend fun getFavoriteFoodById(idFood: Int): DataState<Boolean>
 
     suspend fun saveFavoriteFood(foodId: Int)
+
+    suspend fun clearFavoriteFood()
 }

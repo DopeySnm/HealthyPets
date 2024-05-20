@@ -7,4 +7,6 @@ interface PinCodeRepository {
     suspend fun savePinCodeHash(pinCodeHash: ByteArray)
 
     suspend fun getPinCodeHash(id: Int): DataState<PinCode>
+
+    suspend fun clearPinCode()
 }

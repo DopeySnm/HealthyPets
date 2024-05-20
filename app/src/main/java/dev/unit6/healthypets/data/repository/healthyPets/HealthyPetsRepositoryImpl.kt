@@ -6,6 +6,8 @@ import dev.unit6.healthypets.data.db.model.FavoriteFoodEntity
 import dev.unit6.healthypets.data.db.model.FoodId
 import dev.unit6.healthypets.data.model.Food
 import dev.unit6.healthypets.data.state.DataState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HealthyPetsRepositoryImpl @Inject constructor(
@@ -117,5 +119,9 @@ class HealthyPetsRepositoryImpl @Inject constructor(
 
     override suspend fun saveFavoriteFood(foodId: Int) {
         dao.saveFavoriteFood(FavoriteFoodEntity(foodId = foodId))
+    }
+
+    override suspend fun clearFavoriteFood() {
+        dao.deleteAllFavoriteFood()
     }
 }
