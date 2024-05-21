@@ -18,5 +18,6 @@ abstract class PetsHealthyDatabase : RoomDatabase() {
     abstract fun pinCodeDao(): PinCodeDao
 
     abstract fun favoriteFoodDao(): FavoriteFoodDao
+
     abstract fun personalInfoDao(): PersonalInfoDao
 }

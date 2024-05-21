@@ -66,6 +66,8 @@ interface AppBindsModule {
         useCase: DislikeFoodUseCaseImpl
     ) : DislikeFoodUseCase
 
+    @Binds
+    @Singleton
     fun bindGetPersonalInfoUseCase(
         useCase: GetPersonalInfoUseCaseImpl
     ): GetPersonalInfoUseCase

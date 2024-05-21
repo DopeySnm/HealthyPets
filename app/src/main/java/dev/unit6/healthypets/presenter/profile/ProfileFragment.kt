@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +38,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val options = listOf(
             ProfileOptionUi(
                 name = getString(R.string.personal_info),
-                action = {  }
+                action = { onClickPersonalInfo() }
             ),
             ProfileOptionUi(
                 name = getString(R.string.my_pets),
@@ -66,6 +67,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         )
 
         adapter.submitList(options)
+    }
+
+    private fun onClickPersonalInfo() {
+        Navigation.findNavController(requireView()).navigate(R.id.personalInfoFragment)
     }
 
     private fun initializeRecycler() = with(binding.profileOptionsRecyclerView) {

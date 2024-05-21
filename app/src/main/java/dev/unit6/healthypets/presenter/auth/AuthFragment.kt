@@ -122,7 +122,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         binding.buttonBackImageView.visibility = View.INVISIBLE
 
         binding.buttonTextView.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.PINCodeResetFragment)
+            TODO()
         }
         binding.wrongTextView.visibility = View.INVISIBLE
         binding.buttonTextView.setText(R.string.can_not_enter)

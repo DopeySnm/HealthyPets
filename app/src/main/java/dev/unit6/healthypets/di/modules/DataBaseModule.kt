@@ -30,6 +30,7 @@ class DataBaseModule {
         return db.favoriteFoodDao()
     }
 
+    @Provides
     fun providePersonalInfoDao(db: PetsHealthyDatabase): PersonalInfoDao {
         return db.personalInfoDao()
     }

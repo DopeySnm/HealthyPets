@@ -4,10 +4,12 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.DateHelper.dateToFloat
 import dev.unit6.healthypets.DateHelper.getDateInFormatted
@@ -19,6 +21,7 @@ import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.presenter.mainScreen.MainScreenViewModel
 import java.util.Date
+import java.util.logging.Logger
 import javax.inject.Inject
 import javax.xml.datatype.DatatypeConstants.MONTHS
 
@@ -43,7 +46,6 @@ class PersonalInfoFragment : Fragment(R.layout.fragment_personal_info) {
                 is UiState.Success -> {
                     initializeUI(it.value)
                 }
-
                 is UiState.Loading -> {}
                 is UiState.Failure -> {}
             }
@@ -58,12 +60,24 @@ class PersonalInfoFragment : Fragment(R.layout.fragment_personal_info) {
     private fun initializeUI(personalInfoUi: PersonalInfoUi) {
         initializeSaveButton()
         initializeTextInput(personalInfoUi)
+        initializeButtonBack()
+    }
+
+    private fun initializeButtonBack() {
+        binding.buttonBackImageView.setOnClickListener {
+            goBack()
+        }
     }
 
     private fun initializeSaveButton() {
         binding.saveButton.setOnClickListener {
             viewModel.savePersonalInfo(personalInfoNumber)
+            goBack()
         }
+    }
+
+    private fun goBack() {
+        Navigation.findNavController(requireView()).popBackStack()
     }
 
     private fun initializeTextInput(personalInfoUi: PersonalInfoUi) {
