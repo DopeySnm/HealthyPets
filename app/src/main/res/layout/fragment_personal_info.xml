@@ -42,18 +42,83 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_back_container_constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/button_back_container_constraintLayout" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Имя"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ваше имя"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Фамилия"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/surname_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ваша Фамилия"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Дата рождения"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dateBirth_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="дд.мм.гггг"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Электронная почта"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mail_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ваша электронная почта"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Номер телефона"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumber_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="+7(___)-___-__-__"/>
+        </LinearLayout>
+
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+        android:id="@+id/save_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
