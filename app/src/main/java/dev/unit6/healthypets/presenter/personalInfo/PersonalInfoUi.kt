@@ -1,6 +1,5 @@
 package dev.unit6.healthypets.presenter.personalInfo
 
-import dev.unit6.healthypets.DateHelper
 import dev.unit6.healthypets.data.model.PersonalInfo
 
 data class PersonalInfoUi(
@@ -15,7 +14,7 @@ data class PersonalInfoUi(
             id = id,
             name = name,
             surname = surname,
-            dateBirth = if (dateBirth == "") 0.0f else DateHelper.dateToFloat(dateString = dateBirth),
+            dateBirth = dateBirth,
             mail = mail,
             phoneNumber = phoneNumber
         )

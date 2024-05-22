@@ -1,11 +1,12 @@
-package dev.unit6.healthypets
+package dev.unit6.healthypets.utils
 
 import android.content.Context
 import android.content.res.Resources.NotFoundException
+import dev.unit6.healthypets.R
 import java.io.IOException
 import java.util.Properties
 
-object ConfigHelper {
+object ConfigUtils {
     fun getConfigValue(context: Context, name: String?): String {
         val resources = context.resources
         try {

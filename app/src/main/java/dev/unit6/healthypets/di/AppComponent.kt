@@ -13,6 +13,7 @@ import dev.unit6.healthypets.presenter.mainScreen.MainScreenFragment
 import dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment
 import dev.unit6.healthypets.presenter.feedInfo.FeedInfoFragment
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoFragment
+import dev.unit6.healthypets.presenter.profile.ProfileFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -30,6 +31,7 @@ interface AppComponent {
     fun inject(fragment: FullListFeedsFragment)
     fun inject(fragment: FeedInfoFragment)
     fun inject(fragment: PersonalInfoFragment)
+    fun inject(fragment: ProfileFragment)
 
     @Component.Builder
     interface Builder{
