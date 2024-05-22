@@ -77,4 +77,6 @@
     <string name="support">Поддержка</string>
     <string name="about_app">О приложении</string>
     <string name="save">Сохранить</string>
+    <string name="camera">Камера</string>
+    <string name="gallery">Галерея</string>
 </resources>

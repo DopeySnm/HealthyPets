@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.domain.GetPersonalInfoUseCase
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
-import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.domain.WipeDataUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

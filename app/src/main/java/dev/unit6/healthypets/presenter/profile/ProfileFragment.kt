@@ -1,9 +1,16 @@
 package dev.unit6.healthypets.presenter.profile
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -11,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.squareup.picasso.Picasso
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentProfileBinding
@@ -19,6 +27,10 @@ import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
 import dev.unit6.healthypets.presenter.MainFragmentDirections
 import javax.inject.Inject
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding: FragmentProfileBinding by viewBinding()
@@ -31,6 +43,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val adapter = ProfileOptionsAdapter()
 
     private val personalInfoNumber = 1
+
+    private val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+        uri?.let {
+            setProfilePhoto(it)
+        }
+    }
+
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
+        if (success) {
+            setProfilePhoto(photoURI)
+        } else {
+            Toast.makeText(requireContext(), "Failed to capture image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private lateinit var photoURI: Uri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,8 +90,72 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun initializeProfilePhotoSelector() {
         binding.profilePhotoSelectorImageView.setOnClickListener {
-            TODO()
+            showImagePickerDialog()
         }
+    }
+
+    private fun showImagePickerDialog() {
+        val options = arrayOf(
+            getString(R.string.camera),
+            getString(R.string.gallery)
+        )
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setItems(options) { _, which ->
+            when (which) {
+                0 -> {
+                    camera()
+                }
+
+                1 -> {
+                    gallery()
+                }
+            }
+        }
+        builder.show()
+    }
+
+    private fun gallery() {
+        dispatchPickPictureIntent()
+    }
+
+    private fun camera() {
+        dispatchTakePictureIntent()
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            " JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        )
+    }
+
+    private fun dispatchTakePictureIntent() {
+        val photoFile: File? = try {
+            createImageFile()
+        } catch (ex: IOException) {
+            Toast.makeText(requireContext(), "Error occurred while creating the file", Toast.LENGTH_SHORT).show()
+            null
+        }
+        photoFile?.also {
+            photoURI = FileProvider.getUriForFile(requireContext(), "com.example.android.fileprovider", it)
+            takePicture.launch(photoURI)
+        }
+    }
+
+    private fun dispatchPickPictureIntent() {
+        pickImage.launch(
+            PickVisualMediaRequest(
+                ActivityResultContracts.PickVisualMedia.ImageOnly
+            )
+        )
+    }
+
+    private fun setProfilePhoto(uri: Uri) {
+        Picasso.get().load(uri).into(binding.profilePhotoImageView)
     }
 
     private fun initializeProfileOptions() {
@@ -74,15 +166,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ),
             ProfileOptionUi(
                 name = getString(R.string.my_pets),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.payment_method),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.settings),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.support),
@@ -90,7 +182,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ),
             ProfileOptionUi(
                 name = getString(R.string.about_app),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.exit),
