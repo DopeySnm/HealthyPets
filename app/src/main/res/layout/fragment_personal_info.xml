@@ -60,65 +60,125 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
                 android:text="Имя" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name_editText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ваше имя" />
+                style="@style/textInputLayout"
+                app:boxStrokeWidth="1px"
+                app:boxStrokeWidthFocused="1px">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:textColorHint="@color/link_water"
+                    android:textColor="@color/bastille"
+                    android:hint="Ваше имя" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
                 android:layout_marginTop="@dimen/personal_info_layout_marginTop_for_fields"
                 android:text="Фамилия" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/surname_editText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ваша Фамилия" />
+                style="@style/textInputLayout"
+                app:boxStrokeWidth="1px"
+                app:boxStrokeWidthFocused="1px">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/surname_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:textColorHint="@color/link_water"
+                    android:textColor="@color/bastille"
+                    android:hint="Ваша Фамилия" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
                 android:layout_marginTop="@dimen/personal_info_layout_marginTop_for_fields"
                 android:text="Дата рождения" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dateBirth_editText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="дд.мм.гггг"
-                android:inputType="none" />
+                style="@style/textInputLayout"
+                app:boxStrokeWidth="1px"
+                app:boxStrokeWidthFocused="1px">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dateBirth_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:textColorHint="@color/link_water"
+                    android:textColor="@color/bastille"
+                    android:hint="дд.мм.гггг"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
                 android:layout_marginTop="@dimen/personal_info_layout_marginTop_for_fields"
                 android:text="Электронная почта" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mail_editText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ваша электронная почта" />
+                style="@style/textInputLayout"
+                app:boxStrokeWidth="1px"
+                app:boxStrokeWidthFocused="1px">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mail_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:textColorHint="@color/link_water"
+                    android:textColor="@color/bastille"
+                    android:hint="Ваша электронная почта" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
                 android:layout_marginTop="@dimen/personal_info_layout_marginTop_for_fields"
                 android:text="Номер телефона" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneNumber_editText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="+7(___)-___-__-__"
-                android:inputType="number" />
+                style="@style/textInputLayout"
+                app:boxStrokeWidth="1px"
+                app:boxStrokeWidthFocused="1px">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumber_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:paddingStart="0dp"
+                    android:textColorHint="@color/link_water"
+                    android:textColor="@color/bastille"
+                    android:hint="+7(___)-___-__-__"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 
