@@ -6,6 +6,8 @@ import dev.unit6.healthypets.data.preference.PreferenceProvider
 import dev.unit6.healthypets.data.preference.PreferenceProviderImpl
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepository
 import dev.unit6.healthypets.data.repository.healthyPets.HealthyPetsRepositoryImpl
+import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepository
+import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepositoryImpl
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
 import dev.unit6.healthypets.domain.DislikeFoodUseCase
@@ -14,10 +16,14 @@ import dev.unit6.healthypets.domain.GetAllFoodsUseCase
 import dev.unit6.healthypets.domain.GetAllFoodsUseCaseImpl
 import dev.unit6.healthypets.domain.GetFeedByIdUseCase
 import dev.unit6.healthypets.domain.GetFeedByIdUseCaseImpl
+import dev.unit6.healthypets.domain.GetPersonalInfoUseCase
+import dev.unit6.healthypets.domain.GetPersonalInfoUseCaseImpl
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCaseImpl
 import dev.unit6.healthypets.domain.LikeFoodUseCase
 import dev.unit6.healthypets.domain.LikeFoodUseCaseImpl
+import dev.unit6.healthypets.domain.SavePersonalInfoUseCase
+import dev.unit6.healthypets.domain.SavePersonalInfoUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCaseImpl
 import javax.inject.Singleton
@@ -59,6 +65,24 @@ interface AppBindsModule {
     fun bindDislikeFoodUseCase(
         useCase: DislikeFoodUseCaseImpl
     ) : DislikeFoodUseCase
+
+    @Binds
+    @Singleton
+    fun bindGetPersonalInfoUseCase(
+        useCase: GetPersonalInfoUseCaseImpl
+    ): GetPersonalInfoUseCase
+
+    @Binds
+    @Singleton
+    fun bindSavePersonalInfoUseCase(
+        useCase: SavePersonalInfoUseCaseImpl
+    ): SavePersonalInfoUseCase
+
+    @Binds
+    @Singleton
+    fun bindPersonalInfoRepository(
+        repository: PersonalInfoRepositoryImpl
+    ) : PersonalInfoRepository
 
     @Binds
     @Singleton

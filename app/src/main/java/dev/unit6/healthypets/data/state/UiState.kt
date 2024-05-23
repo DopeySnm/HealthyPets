@@ -6,6 +6,14 @@ sealed class UiState<out T> {
     data object Loading : UiState<Nothing>()
 
     companion object {
+
+        @JvmStatic
+        fun <I, O> fromDataState(dataState: DataState<I>, mapper: ((I) -> O)): UiState<O> =
+            when(dataState) {
+                is DataState.Success -> Success(mapper(dataState.value))
+                is DataState.Failure -> Failure(dataState.message)
+            }
+
         @JvmStatic
         fun <I> fromDataState(dataState: DataState<I>): UiState<I> =
             when (dataState) {

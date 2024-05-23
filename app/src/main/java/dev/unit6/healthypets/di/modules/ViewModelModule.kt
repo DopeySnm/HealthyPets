@@ -10,6 +10,8 @@ import dev.unit6.healthypets.di.viewModel.ViewModelKey
 import dev.unit6.healthypets.presenter.auth.AuthViewModel
 import dev.unit6.healthypets.presenter.feedInfo.FeedInfoViewModel
 import dev.unit6.healthypets.presenter.mainScreen.MainScreenViewModel
+import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoViewModel
+import dev.unit6.healthypets.presenter.profile.ProfileViewModel
 
 @Module
 abstract class ViewModelModule {
@@ -29,7 +31,17 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(PersonalInfoViewModel::class)
+    abstract fun bindPersonalInfoViewModel(viewModel: PersonalInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(FeedInfoViewModel::class)
     abstract fun bindFeedInfoViewModel(viewModel: FeedInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 
 }

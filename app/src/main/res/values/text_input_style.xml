@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextInputLayout" parent="">
+    </style>
+
+
+    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/link_water</item>
+        <item name="hintTextColor">@color/link_water</item>
+        <item name="boxStrokeColor">@color/link_water</item>
+        <item name="boxBackgroundColor">@color/solitude</item>
+    </style>
+
+</resources>

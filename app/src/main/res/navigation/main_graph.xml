@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_mainFragment_to_feedInfoFragment"
             app:destination="@id/feedInfoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/fullListFeedsFragment"
@@ -51,4 +54,9 @@
             android:name="feedId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="dev.unit6.healthypets.presenter.personalInfo.PersonalInfoFragment"
+        android:label="fragment_personal_info"
+        tools:layout="@layout/fragment_personal_info" />
 </navigation>

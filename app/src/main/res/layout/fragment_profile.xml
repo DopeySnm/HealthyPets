@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_photo_ImageView" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/material_TextView"
+        android:id="@+id/user_name_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profile_layout_marginTop"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/material_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/user_name_TextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

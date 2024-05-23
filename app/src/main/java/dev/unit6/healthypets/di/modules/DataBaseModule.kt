@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dev.unit6.healthypets.data.db.FavoriteFoodDao
 import dev.unit6.healthypets.data.db.PetsHealthyDatabase
+import dev.unit6.healthypets.data.db.PersonalInfoDao
 import dev.unit6.healthypets.data.db.PinCodeDao
 
 @Module
@@ -27,5 +28,10 @@ class DataBaseModule {
     @Provides
     fun provideFavoriteFoodDao(db: PetsHealthyDatabase): FavoriteFoodDao {
         return db.favoriteFoodDao()
+    }
+
+    @Provides
+    fun providePersonalInfoDao(db: PetsHealthyDatabase): PersonalInfoDao {
+        return db.personalInfoDao()
     }
 }
