@@ -5,6 +5,8 @@ import dev.unit6.healthypets.data.db.model.PinCodeEntity
 import dev.unit6.healthypets.data.model.PinCode
 import dev.unit6.healthypets.data.preference.PreferenceProvider
 import dev.unit6.healthypets.data.state.DataState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PinCodeRepositoryImpl @Inject constructor(
@@ -22,6 +24,11 @@ class PinCodeRepositoryImpl @Inject constructor(
                 throw IllegalArgumentException("Can't save PIN code")
             }
         )
+    }
+
+    override suspend fun clearPinCode() {
+        dao.deleteAllPinCode()
+        preferenceProvider.clearSharedPreferences()
     }
 
     override suspend fun getPinCodeHash(id: Int): DataState<PinCode> {

@@ -21,4 +21,7 @@ interface FavoriteFoodDao {
     @Query("SELECT * FROM favoriteFood WHERE foodId = :foodId")
     suspend fun getFavoriteFoodById(foodId: Int): FavoriteFoodEntity?
 
+    @Query("DELETE FROM favoriteFood")
+    suspend fun deleteAllFavoriteFood()
+
 }

@@ -24,6 +24,7 @@ class PersonalInfoRepositoryImpl @Inject constructor(
         )
     }
 
+
     override suspend fun savePersonalInfo(personalInfo: PersonalInfo) {
         if (dao.getById(personalInfo.id) != null) {
             dao.update(personalInfo.toPersonalInfoEntity())
@@ -31,6 +32,10 @@ class PersonalInfoRepositoryImpl @Inject constructor(
         } else {
             dao.save(personalInfo.toPersonalInfoEntity())
         }
+    }
+
+    override suspend fun clearPersonalInfo() {
+        dao.deleteAllPersonalInfo()
     }
 
 }

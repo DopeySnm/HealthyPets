@@ -9,4 +9,6 @@ interface PersonalInfoRepository {
 
     suspend fun savePersonalInfo(personalInfo: PersonalInfo)
 
+    suspend fun clearPersonalInfo()
+
 }

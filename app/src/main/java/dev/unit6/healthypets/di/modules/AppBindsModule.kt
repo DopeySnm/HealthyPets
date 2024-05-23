@@ -10,6 +10,12 @@ import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepository
 import dev.unit6.healthypets.data.repository.personalInfo.PersonalInfoRepositoryImpl
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
+import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCase
+import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCaseImpl
+import dev.unit6.healthypets.domain.ClearPersonalInfoUseCase
+import dev.unit6.healthypets.domain.ClearPersonalInfoUseCaseImpl
+import dev.unit6.healthypets.domain.ClearPinCodeUseCase
+import dev.unit6.healthypets.domain.ClearPinCodeUseCaseImpl
 import dev.unit6.healthypets.domain.DislikeFoodUseCase
 import dev.unit6.healthypets.domain.DislikeFoodUseCaseImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
@@ -26,6 +32,8 @@ import dev.unit6.healthypets.domain.SavePersonalInfoUseCase
 import dev.unit6.healthypets.domain.SavePersonalInfoUseCaseImpl
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCaseImpl
+import dev.unit6.healthypets.domain.WipeDataUseCase
+import dev.unit6.healthypets.domain.WipeDataUseCaseImpl
 import javax.inject.Singleton
 
 @Module
@@ -80,9 +88,34 @@ interface AppBindsModule {
 
     @Binds
     @Singleton
+    fun bindClearPersonalInfoUseCase(
+        useCase: ClearPersonalInfoUseCaseImpl
+    ): ClearPersonalInfoUseCase
+
+    @Binds
+    @Singleton
     fun bindPersonalInfoRepository(
         repository: PersonalInfoRepositoryImpl
     ) : PersonalInfoRepository
+
+    @Binds
+    @Singleton
+    fun bindWipeDataUseCase(
+        useCase: WipeDataUseCaseImpl
+    ) : WipeDataUseCase
+
+
+    @Binds
+    @Singleton
+    fun bindClearFavoriteFoodUseCase(
+        useCase: ClearFavoriteFoodUseCaseImpl
+    ) : ClearFavoriteFoodUseCase
+
+    @Binds
+    @Singleton
+    fun bindClearPinCodeUseCase(
+        useCase: ClearPinCodeUseCaseImpl
+    ) : ClearPinCodeUseCase
 
     @Binds
     @Singleton

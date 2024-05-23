@@ -4,4 +4,6 @@ interface PreferenceProvider {
     fun setIsProtected()
 
     fun getIsProtected(): Boolean
+
+    fun clearSharedPreferences()
 }

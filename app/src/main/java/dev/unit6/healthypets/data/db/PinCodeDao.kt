@@ -12,4 +12,7 @@ interface PinCodeDao {
 
     @Query("SELECT * FROM pinCode WHERE id = :id")
     suspend fun getHashPinCode(id: Int): PinCodeEntity?
+
+    @Query("DELETE FROM pinCode")
+    suspend fun deleteAllPinCode()
 }

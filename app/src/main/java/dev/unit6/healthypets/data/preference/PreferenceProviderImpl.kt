@@ -14,6 +14,10 @@ class PreferenceProviderImpl @Inject constructor(
         get() = appContext.getSharedPreferences(sharedPreferenceName, Context.MODE_PRIVATE)
 
 
+    override fun clearSharedPreferences() {
+        preference.edit().clear().apply()
+    }
+
     override fun setIsProtected() {
         preference.edit().putBoolean(
             IS_PROTECTED,
