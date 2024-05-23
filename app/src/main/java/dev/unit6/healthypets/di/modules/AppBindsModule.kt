@@ -18,6 +18,8 @@ import dev.unit6.healthypets.domain.ClearPinCodeUseCase
 import dev.unit6.healthypets.domain.ClearPinCodeUseCaseImpl
 import dev.unit6.healthypets.domain.DislikeFoodUseCase
 import dev.unit6.healthypets.domain.DislikeFoodUseCaseImpl
+import dev.unit6.healthypets.domain.DoNotSetPinCodeUseCase
+import dev.unit6.healthypets.domain.DoNotSetPinCodeUseCaseImpl
 import dev.unit6.healthypets.domain.GetAllFoodsUseCase
 import dev.unit6.healthypets.domain.GetAllFoodsUseCaseImpl
 import dev.unit6.healthypets.domain.GetFeedByIdUseCase
@@ -103,6 +105,12 @@ interface AppBindsModule {
     fun bindWipeDataUseCase(
         useCase: WipeDataUseCaseImpl
     ) : WipeDataUseCase
+
+    @Binds
+    @Singleton
+    fun bindDoNotSetPinCodeUseCaseImpl(
+        useCase: DoNotSetPinCodeUseCaseImpl
+    ) : DoNotSetPinCodeUseCase
 
 
     @Binds

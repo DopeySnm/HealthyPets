@@ -9,4 +9,6 @@ interface PinCodeRepository {
     suspend fun getPinCodeHash(id: Int): DataState<PinCode>
 
     suspend fun clearPinCode()
+
+    suspend fun setIsProtected()
 }

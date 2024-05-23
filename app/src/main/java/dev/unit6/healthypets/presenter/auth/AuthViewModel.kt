@@ -7,24 +7,27 @@ import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.PinCodeHelp
 import dev.unit6.healthypets.data.state.DataState
 import dev.unit6.healthypets.data.state.UiState
+import dev.unit6.healthypets.domain.DoNotSetPinCodeUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthViewModel
 @Inject constructor(
     private val savePinCodeHashUseCase: SavePinCodeHashUseCase,
-    private val getPinCodeHashUseCase: GetPinCodeHashUseCase
+    private val getPinCodeHashUseCase: GetPinCodeHashUseCase,
+    private val doNotSetPinCodeUseCase: DoNotSetPinCodeUseCase
 ) : ViewModel() {
 
     private val _pinCodeLength = MutableLiveData<Int>()
     val pinCodeLength: LiveData<Int>
         get() = _pinCodeLength
 
-    private val _pinCode = MutableLiveData<String>("")
+    private val _pinCode = MutableLiveData("")
 
-    private val _repeatPinCode = MutableLiveData<String>("")
+    private val _repeatPinCode = MutableLiveData("")
 
     private val _pinCodeState = MutableLiveData<UiState<PinCodeState>>(UiState.Loading)
     val pinCodeState: LiveData<UiState<PinCodeState>>
@@ -122,7 +125,10 @@ class AuthViewModel
     }
 
     fun emptyPinCode() {
-        _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+        viewModelScope.launch {
+            doNotSetPinCodeUseCase()
+            _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+        }
     }
 
     private fun savePinCode() {

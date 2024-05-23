@@ -8,6 +8,8 @@ import dev.unit6.healthypets.di.modules.AppBindsModule
 import dev.unit6.healthypets.di.modules.DataBaseModule
 import dev.unit6.healthypets.di.modules.NetworkModule
 import dev.unit6.healthypets.di.modules.ViewModelModule
+import dev.unit6.healthypets.presenter.MainActivity
+import dev.unit6.healthypets.presenter.MainFragment
 import dev.unit6.healthypets.presenter.auth.AuthFragment
 import dev.unit6.healthypets.presenter.mainScreen.MainScreenFragment
 import dev.unit6.healthypets.presenter.fullListFeeds.FullListFeedsFragment
@@ -32,6 +34,7 @@ interface AppComponent {
     fun inject(fragment: FeedInfoFragment)
     fun inject(fragment: PersonalInfoFragment)
     fun inject(fragment: ProfileFragment)
+    fun inject(activity: MainActivity)
 
     @Component.Builder
     interface Builder{
