@@ -18,4 +18,7 @@ interface PersonalInfoDao {
     @Update
     suspend fun update(personalInfoEntity: PersonalInfoEntity)
 
+    @Query("DELETE FROM personalInfo")
+    suspend fun deleteAllPersonalInfo()
+
 }

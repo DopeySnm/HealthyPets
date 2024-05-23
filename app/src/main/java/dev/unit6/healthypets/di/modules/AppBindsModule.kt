@@ -12,6 +12,8 @@ import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepository
 import dev.unit6.healthypets.data.repository.pinCode.PinCodeRepositoryImpl
 import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCase
 import dev.unit6.healthypets.domain.ClearFavoriteFoodUseCaseImpl
+import dev.unit6.healthypets.domain.ClearPersonalInfoUseCase
+import dev.unit6.healthypets.domain.ClearPersonalInfoUseCaseImpl
 import dev.unit6.healthypets.domain.ClearPinCodeUseCase
 import dev.unit6.healthypets.domain.ClearPinCodeUseCaseImpl
 import dev.unit6.healthypets.domain.DislikeFoodUseCase
@@ -83,6 +85,12 @@ interface AppBindsModule {
     fun bindSavePersonalInfoUseCase(
         useCase: SavePersonalInfoUseCaseImpl
     ): SavePersonalInfoUseCase
+
+    @Binds
+    @Singleton
+    fun bindClearPersonalInfoUseCase(
+        useCase: ClearPersonalInfoUseCaseImpl
+    ): ClearPersonalInfoUseCase
 
     @Binds
     @Singleton

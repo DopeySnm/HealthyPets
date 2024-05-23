@@ -8,10 +8,12 @@ interface WipeDataUseCase {
 
 class WipeDataUseCaseImpl @Inject constructor(
     private val clearFavoriteFood: ClearFavoriteFoodUseCase,
-    private val clearPinCodeUseCase: ClearPinCodeUseCase
+    private val clearPinCode: ClearPinCodeUseCase,
+    private val clearPersonalInfo: ClearPersonalInfoUseCase
 ) : WipeDataUseCase{
     override suspend fun invoke() {
-        clearFavoriteFood.invoke()
-        clearPinCodeUseCase.invoke()
+        clearFavoriteFood()
+        clearPinCode()
+        clearPersonalInfo()
     }
 }
