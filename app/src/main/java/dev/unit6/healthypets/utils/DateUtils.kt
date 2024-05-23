@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter
 
 object DateUtils {
 
-    private const val DATE_FORMAT = "dd.MM.yyyy"
+    private const val DEFAULT_DATE_MASK = "dd.MM.yyyy"
 
-    private val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
+    private val formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_MASK)
 
     /**
      * Default value formatter = "dd.MM.yyyy"
