@@ -2,9 +2,14 @@ package dev.unit6.healthypets.utils
 
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.ExifInterface
+import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import java.io.FileInputStream
+
 
 object ImageUtils {
     private const val BUFFER_SIZE = 1024
@@ -33,5 +38,18 @@ object ImageUtils {
                 }
             }
         }
+    }
+
+    fun getBitmapByUrl(contentResolver: ContentResolver, imageUri: Uri): Bitmap? {
+        val inputStream = contentResolver.openInputStream(imageUri)
+        return inputStream?.let {
+            BitmapFactory.decodeStream(inputStream)
+        }
+    }
+    fun getExifByUri(imageUri: Uri,contentResolver: ContentResolver): ExifInterface? {
+        contentResolver.openInputStream(imageUri)?.use { inputStream ->
+            return ExifInterface(inputStream)
+        }
+        return null
     }
 }
