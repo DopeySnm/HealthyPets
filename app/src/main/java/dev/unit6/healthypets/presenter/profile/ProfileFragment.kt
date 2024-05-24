@@ -86,6 +86,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun initialize(personalInfoUi: PersonalInfoUi) {
         binding.userNameTextView.text = personalInfoUi.name
+        if (personalInfoUi.urlPhoto != ""){
+            Picasso
+                .get()
+                .load(personalInfoUi.urlPhoto)
+                .placeholder(R.drawable.profile_empty_photo_picture)
+                .into(binding.profilePhotoImageView)
+        }
     }
 
     private fun initializeProfilePhotoSelector() {
@@ -155,6 +162,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun setProfilePhoto(uri: Uri) {
+        viewModel.savePhoto(uri.toString(), personalInfoNumber)
         Picasso.get().load(uri).into(binding.profilePhotoImageView)
     }
 

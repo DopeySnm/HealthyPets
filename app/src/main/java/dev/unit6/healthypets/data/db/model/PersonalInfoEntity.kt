@@ -14,7 +14,8 @@ data class PersonalInfoEntity(
     val surname: String?,
     val dateBirth: String?,
     val mail: String?,
-    val phoneNumber: String?
+    val phoneNumber: String?,
+    val urlPhoto: String?
 ) {
     fun toPersonalInfo(): PersonalInfo =
         PersonalInfo(
@@ -23,6 +24,7 @@ data class PersonalInfoEntity(
             surname,
             dateBirth,
             mail,
-            phoneNumber
+            phoneNumber,
+            urlPhoto
         )
 }
