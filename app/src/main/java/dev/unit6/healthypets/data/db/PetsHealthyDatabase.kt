@@ -12,7 +12,7 @@ import dev.unit6.healthypets.data.db.model.PinCodeEntity
         FavoriteFoodEntity::class,
         PersonalInfoEntity::class
     ],
-    version = 1
+    version = 2
 )
 abstract class PetsHealthyDatabase : RoomDatabase() {
     abstract fun pinCodeDao(): PinCodeDao

@@ -3,8 +3,9 @@ package dev.unit6.healthypets.presenter.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,17 +21,17 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.squareup.picasso.Picasso
 import dev.unit6.healthypets.R
+import dev.unit6.healthypets.data.state.DisplayIntent
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentProfileBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
-import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
 import dev.unit6.healthypets.presenter.MainFragmentDirections
-import javax.inject.Inject
+import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
+import dev.unit6.healthypets.utils.CameraUtils
+import dev.unit6.healthypets.utils.ImageUtils
 import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
+import javax.inject.Inject
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding: FragmentProfileBinding by viewBinding()
@@ -44,21 +45,60 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val personalInfoNumber = 1
 
-    private val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
-        uri?.let {
-            setProfilePhoto(it)
-        }
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        var photo: File? = null
+        val pickImage =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+                uri?.let {
+                    setProfilePhoto(it)
+                }
+            }
+        val takePicture =
+            registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
+                if (success && photo != null) {
+                    val context = requireContext()
+                    val photoUri = FileProvider.getUriForFile(
+                        context,
+                        "com.example.android.fileprovider",
+                        photo!!
+                    )
+                    setProfilePhoto(photoUri)
+                    ImageUtils.savePhotoToGallery(
+                        photo!!.absolutePath,
+                        context.contentResolver
+                    )
+                } else {
+                    Toast.makeText(requireContext(), "Failed to capture image", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        viewModel.displayIntent.observe(viewLifecycleOwner) {
+            when (it) {
+                DisplayIntent.Gallery -> pickImage.launch(
+                    PickVisualMediaRequest(
+                        ActivityResultContracts.PickVisualMedia.ImageOnly
+                    )
+                )
 
-    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
-        if (success) {
-            setProfilePhoto(photoURI)
-        } else {
-            Toast.makeText(requireContext(), "Failed to capture image", Toast.LENGTH_SHORT).show()
-        }
-    }
+                DisplayIntent.Camera -> {
+                    photo = CameraUtils.takePicture(requireContext())
+                    val photoUri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "com.example.android.fileprovider",
+                        photo!!
+                    )
+                    takePicture.launch(photoUri)
+                }
 
-    private lateinit var photoURI: Uri
+                else -> {}
+            }
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,10 +106,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         viewModel.loadPersonalInfo(personalInfoNumber)
 
         viewModel.personalInfo.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is UiState.Success -> {
                     initialize(it.value)
                 }
+
                 is UiState.Loading -> {}
                 is UiState.Failure -> {}
             }
@@ -86,7 +127,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun initialize(personalInfoUi: PersonalInfoUi) {
         binding.userNameTextView.text = personalInfoUi.name
-        if (personalInfoUi.urlPhoto != ""){
+        if (personalInfoUi.urlPhoto != "") {
             Picasso
                 .get()
                 .load(personalInfoUi.urlPhoto)
@@ -107,63 +148,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             getString(R.string.gallery)
         )
         val builder = AlertDialog.Builder(requireContext())
-        builder.setItems(options) { _, which ->
-            when (which) {
+        builder.setItems(options) { _, index ->
+            when (index) {
                 0 -> {
-                    camera()
+                    viewModel.openCamera()
                 }
 
                 1 -> {
-                    gallery()
+                    viewModel.openGallery()
                 }
             }
         }
         builder.show()
     }
 
-    private fun gallery() {
-        dispatchPickPictureIntent()
-    }
-
-    private fun camera() {
-        dispatchTakePictureIntent()
-    }
-
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        return File.createTempFile(
-            " JPEG_${timeStamp}_",
-            ".jpg",
-            storageDir
-        )
-    }
-
-    private fun dispatchTakePictureIntent() {
-        val photoFile: File? = try {
-            createImageFile()
-        } catch (ex: IOException) {
-            Toast.makeText(requireContext(), "Error occurred while creating the file", Toast.LENGTH_SHORT).show()
-            null
-        }
-        photoFile?.also {
-            photoURI = FileProvider.getUriForFile(requireContext(), "com.example.android.fileprovider", it)
-            takePicture.launch(photoURI)
-        }
-    }
-
-    private fun dispatchPickPictureIntent() {
-        pickImage.launch(
-            PickVisualMediaRequest(
-                ActivityResultContracts.PickVisualMedia.ImageOnly
-            )
-        )
-    }
-
     private fun setProfilePhoto(uri: Uri) {
         viewModel.savePhoto(uri.toString(), personalInfoNumber)
-        Picasso.get().load(uri).into(binding.profilePhotoImageView)
     }
 
     private fun initializeProfileOptions() {
