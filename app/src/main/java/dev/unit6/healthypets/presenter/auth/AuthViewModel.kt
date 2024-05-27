@@ -93,7 +93,7 @@ class AuthViewModel
 
                     PinCodeState.Repeat -> {
                         if (setPinCode(pinCode, _repeatPinCode)) {
-                            savePinCode()
+                            savePinCode(id)
                         }
                     }
 
@@ -131,13 +131,13 @@ class AuthViewModel
         }
     }
 
-    private fun savePinCode() {
+    private fun savePinCode(id: Int) {
         viewModelScope.launch {
             _pinCode.value?.let { pinCode ->
                 _repeatPinCode.value?.let { repeatPinCode ->
                     if (repeatPinCode == pinCode) {
                         val pinCodeHash = pinCodeHelp.hashPinCode(pinCode)
-                        savePinCodeHashUseCase(pinCodeHash)
+                        savePinCodeHashUseCase(pinCodeHash, id)
                         _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
                     } else {
                         _pinCodeState.postValue(UiState.Success(PinCodeState.NotMatch))

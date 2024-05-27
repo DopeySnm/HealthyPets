@@ -4,7 +4,7 @@ import dev.unit6.healthypets.data.model.PinCode
 import dev.unit6.healthypets.data.state.DataState
 
 interface PinCodeRepository {
-    suspend fun savePinCodeHash(pinCodeHash: ByteArray)
+    suspend fun savePinCodeHash(pinCodeHash: ByteArray, id: Int)
 
     suspend fun getPinCodeHash(id: Int): DataState<PinCode>
 
