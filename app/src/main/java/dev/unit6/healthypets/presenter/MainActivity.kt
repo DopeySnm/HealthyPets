@@ -3,7 +3,6 @@ package dev.unit6.healthypets.presenter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -11,23 +10,14 @@ import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
 import dev.unit6.healthypets.data.state.DataState
-import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.ActivityMainBinding
 import dev.unit6.healthypets.di.appComponent
-import dev.unit6.healthypets.di.viewModel.ViewModelFactory
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
-import dev.unit6.healthypets.presenter.auth.AuthViewModel
-import dev.unit6.healthypets.presenter.auth.PinCodeState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding: ActivityMainBinding by viewBinding()
-
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelFactory
-//
-//    private val viewModel: AuthViewModel by viewModels { viewModelFactory }
 
     @Inject
     lateinit var getPinCodeHashUseCase: GetPinCodeHashUseCase
@@ -43,25 +33,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         this.appComponent.inject(this)
 
         installSplashScreen().setKeepOnScreenCondition {
-//            viewModel.checkPinCodeStatus(pinCodeNumber)
-//            viewModel.pinCodeState.observe(this) {
-//                when (it) {
-//                    is UiState.Success -> {
-//                        when(it.value) {
-//                            PinCodeState.Access -> {
-//                                setStartDestination(R.id.mainFragment)
-//                            }
-//                            else -> {
-//                                setStartDestination(R.id.authFragment)
-//                            }
-//                        }
-//                        val handler = Handler(Looper.getMainLooper())
-//                        handler.postDelayed({ keep = false }, DELAY)
-//                    }
-//                    is UiState.Failure -> {}
-//                    is UiState.Loading -> {}
-//                }
-//            }
 
             lifecycleScope.launch {
                 val result = getPinCodeHashUseCase(pinCodeNumber)
