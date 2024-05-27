@@ -7,7 +7,8 @@ data class PersonalInfoUi(
     var surname: String = "",
     var dateBirth: String = "",
     var mail: String = "",
-    var phoneNumber: String = ""
+    var phoneNumber: String = "",
+    var urlPhoto: String = ""
 ) {
     fun toPersonalInfo(id: Int): PersonalInfo =
         PersonalInfo(
@@ -16,6 +17,7 @@ data class PersonalInfoUi(
             surname = surname,
             dateBirth = dateBirth,
             mail = mail,
-            phoneNumber = phoneNumber
+            phoneNumber = phoneNumber,
+            urlPhoto = urlPhoto
         )
 }

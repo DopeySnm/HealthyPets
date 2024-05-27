@@ -1,9 +1,16 @@
 package dev.unit6.healthypets.presenter.profile
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -12,41 +19,85 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.unit6.healthypets.R
+import dev.unit6.healthypets.data.state.DisplayIntent
 import dev.unit6.healthypets.data.state.UiState
 import dev.unit6.healthypets.databinding.FragmentProfileBinding
 import dev.unit6.healthypets.di.appComponent
 import dev.unit6.healthypets.di.viewModel.ViewModelFactory
-import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
+import dev.unit6.healthypets.extension.BitmapExtension.modifyOrientationBitmap
 import dev.unit6.healthypets.presenter.MainFragmentDirections
+import dev.unit6.healthypets.presenter.personalInfo.PersonalInfoUi
+import dev.unit6.healthypets.utils.CameraUtils
+import dev.unit6.healthypets.utils.ImageUtils
+import java.io.File
 import javax.inject.Inject
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
-    private val binding: FragmentProfileBinding by viewBinding()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
+    private val binding: FragmentProfileBinding by viewBinding()
     private val viewModel: ProfileViewModel by viewModels { viewModelFactory }
-
     private val adapter = ProfileOptionsAdapter()
-
     private val personalInfoNumber = 1
+    private val providerBundle = "com.example.android.fileprovider"
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        var photo: File? = null
+        val pickImage =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+                uri?.let {
+                    setProfilePhoto(it)
+                }
+            }
+        val context = requireContext()
+        val takePicture =
+            registerForActivityResult(ActivityResultContracts.TakePicture()) {
+                CameraUtils.updatePhoto(it, context, photo, providerBundle) {
+                    setProfilePhoto(it)
+                }
+            }
+        viewModel.displayIntent.observe(viewLifecycleOwner) {
+            when (it) {
+                DisplayIntent.Gallery -> pickImage.launch(
+                    PickVisualMediaRequest(
+                        ActivityResultContracts.PickVisualMedia.ImageOnly
+                    )
+                )
+
+                DisplayIntent.Camera -> {
+                    photo = CameraUtils.takePicture(context)
+                    val photoUri = FileProvider.getUriForFile(
+                        context,
+                        providerBundle,
+                        photo!!
+                    )
+                    takePicture.launch(photoUri)
+                }
+
+                else -> {}
+            }
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.loadPersonalInfo(personalInfoNumber)
-
         viewModel.personalInfo.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is UiState.Success -> {
                     initialize(it.value)
                 }
+
                 is UiState.Loading -> {}
                 is UiState.Failure -> {}
             }
         }
-
         initializeUI()
     }
 
@@ -58,12 +109,39 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun initialize(personalInfoUi: PersonalInfoUi) {
         binding.userNameTextView.text = personalInfoUi.name
+        val context = requireContext()
+        if (personalInfoUi.urlPhoto.isNotEmpty()) {
+            val uri = Uri.parse(personalInfoUi.urlPhoto)
+            ImageUtils.getBitmapByUrl(context.contentResolver, uri)?.let {
+                val rotateBitmap = it.modifyOrientationBitmap(uri, context.contentResolver)
+                binding.profilePhotoImageView.setImageBitmap(rotateBitmap)
+            }
+        }
     }
 
     private fun initializeProfilePhotoSelector() {
         binding.profilePhotoSelectorImageView.setOnClickListener {
-            TODO()
+            showImagePickerDialog()
         }
+    }
+
+    private fun showImagePickerDialog() {
+        val options = arrayOf(
+            getString(R.string.camera),
+            getString(R.string.gallery)
+        )
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setItems(options) { _, index ->
+            when (index) {
+                0 -> viewModel.openCamera()
+                1 -> viewModel.openGallery()
+            }
+        }
+        builder.show()
+    }
+
+    private fun setProfilePhoto(uri: Uri) {
+        viewModel.savePhoto(uri.toString(), personalInfoNumber)
     }
 
     private fun initializeProfileOptions() {
@@ -74,15 +152,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ),
             ProfileOptionUi(
                 name = getString(R.string.my_pets),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.payment_method),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.settings),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.support),
@@ -90,7 +168,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ),
             ProfileOptionUi(
                 name = getString(R.string.about_app),
-                action = {  }
+                action = { }
             ),
             ProfileOptionUi(
                 name = getString(R.string.exit),
@@ -112,9 +190,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initializeRecycler() = with(binding.profileOptionsRecyclerView) {
-        layoutManager = LinearLayoutManager(
-            context
-        )
+        layoutManager = LinearLayoutManager(context)
         addItemDecoration(createItemDecorator())
         adapter = this@ProfileFragment.adapter
     }
