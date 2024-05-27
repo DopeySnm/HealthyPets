@@ -168,6 +168,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         context.appComponent.inject(this)
         super.onAttach(context)
     }
+
     companion object {
         @JvmStatic
         fun newInstance(): Fragment =

@@ -13,9 +13,9 @@ class PinCodeRepositoryImpl @Inject constructor(
     private val dao: PinCodeDao,
     private val preferenceProvider: PreferenceProvider
 ) : PinCodeRepository {
-    override suspend fun savePinCodeHash(pinCodeHash: ByteArray) {
+    override suspend fun savePinCodeHash(pinCodeHash: ByteArray, id: Int) {
         kotlin.runCatching {
-            dao.saveHashPinCode(PinCodeEntity(value = pinCodeHash))
+            dao.saveHashPinCode(PinCodeEntity(id = id, value = pinCodeHash))
         }.fold(
             onSuccess = {
                 preferenceProvider.setIsProtected()
@@ -38,13 +38,16 @@ class PinCodeRepositoryImpl @Inject constructor(
             onSuccess = { pair ->
                 pair.first?.let {
                     DataState.Success(PinCode(it.value, pair.second))
-                }
-                DataState.Success(PinCode(null, pair.second))
+                } ?: DataState.Success(PinCode(null, pair.second))
             },
             onFailure = {
                 DataState.Failure(it.message ?: "Unknown error")
             }
         )
+    }
+
+    override suspend fun setIsProtected() {
+        preferenceProvider.setIsProtected()
     }
 
 }

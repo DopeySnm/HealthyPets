@@ -7,24 +7,27 @@ import androidx.lifecycle.viewModelScope
 import dev.unit6.healthypets.PinCodeHelp
 import dev.unit6.healthypets.data.state.DataState
 import dev.unit6.healthypets.data.state.UiState
+import dev.unit6.healthypets.domain.DoNotSetPinCodeUseCase
 import dev.unit6.healthypets.domain.GetPinCodeHashUseCase
 import dev.unit6.healthypets.domain.SavePinCodeHashUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthViewModel
 @Inject constructor(
     private val savePinCodeHashUseCase: SavePinCodeHashUseCase,
-    private val getPinCodeHashUseCase: GetPinCodeHashUseCase
+    private val getPinCodeHashUseCase: GetPinCodeHashUseCase,
+    private val doNotSetPinCodeUseCase: DoNotSetPinCodeUseCase
 ) : ViewModel() {
 
     private val _pinCodeLength = MutableLiveData<Int>()
     val pinCodeLength: LiveData<Int>
         get() = _pinCodeLength
 
-    private val _pinCode = MutableLiveData<String>("")
+    private val _pinCode = MutableLiveData("")
 
-    private val _repeatPinCode = MutableLiveData<String>("")
+    private val _repeatPinCode = MutableLiveData("")
 
     private val _pinCodeState = MutableLiveData<UiState<PinCodeState>>(UiState.Loading)
     val pinCodeState: LiveData<UiState<PinCodeState>>
@@ -90,7 +93,7 @@ class AuthViewModel
 
                     PinCodeState.Repeat -> {
                         if (setPinCode(pinCode, _repeatPinCode)) {
-                            savePinCode()
+                            savePinCode(id)
                         }
                     }
 
@@ -122,16 +125,19 @@ class AuthViewModel
     }
 
     fun emptyPinCode() {
-        _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+        viewModelScope.launch {
+            doNotSetPinCodeUseCase()
+            _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
+        }
     }
 
-    private fun savePinCode() {
+    private fun savePinCode(id: Int) {
         viewModelScope.launch {
             _pinCode.value?.let { pinCode ->
                 _repeatPinCode.value?.let { repeatPinCode ->
                     if (repeatPinCode == pinCode) {
                         val pinCodeHash = pinCodeHelp.hashPinCode(pinCode)
-                        savePinCodeHashUseCase(pinCodeHash)
+                        savePinCodeHashUseCase(pinCodeHash, id)
                         _pinCodeState.postValue(UiState.Success(PinCodeState.Access))
                     } else {
                         _pinCodeState.postValue(UiState.Success(PinCodeState.NotMatch))
